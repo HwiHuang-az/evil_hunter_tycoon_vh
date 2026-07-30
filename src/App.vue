@@ -36,7 +36,8 @@
 
   <!-- Attack Speed Calculator -->
   <div v-show="activeTab === 'attack'">
-    <table>
+    <div class="calc-scroll">
+    <table class="attack-table">
       <thead>
       <th v-for="item in items" :key="item">
         {{ item }}
@@ -141,6 +142,7 @@
       </td>
       </tbody>
     </table>
+    </div>
     <div class="equip">
       <span>룬, 장비 공속: </span>
       <input v-model.trim.number="equip_speed" max="100" min="0" placeholder="입력(%)" type="number"
@@ -941,16 +943,12 @@
 
       <h3>유니크 공통 정보</h3>
       <ol class="rune-guide">
-        <li>유니크 장비는 <b>총 5개 옵션</b>을 가지며, 고유옵션을 제외한 나머지는 아래 랜덤옵션에서 붙습니다.</li>
-        <li>고유옵션은 개조가 불가하고, 일반옵션은 개조가 가능합니다.</li>
+        <li>유니크 장비는 <b>총 5개 옵션</b>을 가지며, 고유옵션을 제외한 나머지는 랜덤옵션으로 붙습니다.</li>
+        <li>고유옵션은 <b>천사의 축복</b> 또는 <b>대천사의 축복</b>으로 개조할 수 있습니다. 천사의 축복은 성공 확률 25%로 승전 1,000포인트로 구매하고, 대천사의 축복은 유료(과금) 상품입니다.</li>
+        <li>일부 유니크(질풍의 경갑, 저거너트 헬름, 진 질풍의 경갑)는 고유옵션 외에 <b>첫 줄에 고정 옵션</b>이 하나 더 붙습니다.</li>
         <li>모든 유니크 장비에는 무기 전용 랜덤옵션이 붙지 않습니다.</li>
         <li>어비스 부스트의 유니크는 카오스 부스트보다 아이템 레벨·능력치·옵션 범위가 한 단계 높습니다.</li>
       </ol>
-
-      <h4>유니크 랜덤옵션 목록</h4>
-      <div class="unique-random">
-        <span v-for="opt in uniqueRandomOptions" :key="opt" class="unique-random-chip">{{ opt }}</span>
-      </div>
 
       <h3>난이도 추가 시점</h3>
       <div class="rune-scroll">
@@ -988,7 +986,7 @@ import { petEquipSets } from './petEquipData';
 import { challengerTiers, challengerGroups, rankingRewards, participationRewards } from './challengerData';
 import { equipGrades, equipTierHeaders, equipGradeColors } from './equipGradeData';
 import { relics, relicLevelUp } from './relicData';
-import { uniques, uniqueModes, uniqueRandomOptions, uniqueTimeline } from './uniqueData';
+import { uniques, uniqueModes, uniqueTimeline } from './uniqueData';
 
 const BOX_SOURCES = ['반짝A', '반짝B', '촌비'];
 
@@ -1192,7 +1190,6 @@ export default {
         relicLevelUp,
         uniques,
         uniqueModes,
-        uniqueRandomOptions,
         uniqueTimeline,
         uniqueMode: '카오스 부스트',
 
@@ -1925,6 +1922,22 @@ td > select, td > input {
   width: 100%;
   border: none;
   box-sizing: border-box;
+}
+
+/* 공속 계산기: 9열이라 좁은 화면에서만 가로 스크롤 */
+.calc-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.attack-table {
+  min-width: 540px;
+}
+
+.attack-table th {
+  word-break: keep-all;
+  font-size: 13px;
+  padding: 5px 2px;
 }
 
 input {
@@ -2938,10 +2951,9 @@ h3, h4 {
 
 .equip-grade-table {
   table-layout: auto;
-  width: max-content;
-  min-width: 100%;
+  width: 100%;
   font-size: 12px;
-  white-space: nowrap;
+  word-break: keep-all;
   margin-bottom: 14px;
 }
 
@@ -2975,9 +2987,9 @@ h3, h4 {
 
 .relic-table {
   table-layout: auto;
-  width: max-content;
-  min-width: 100%;
+  width: 100%;
   font-size: 12px;
+  word-break: keep-all;
 }
 
 .relic-table th, .relic-table td {
@@ -2991,15 +3003,13 @@ h3, h4 {
 
 .relic-table .relic-effect {
   text-align: left;
-  min-width: 260px;
 }
 
 .relic-levelup-table {
   table-layout: auto;
-  width: max-content;
-  min-width: 100%;
+  width: 100%;
   font-size: 11px;
-  white-space: nowrap;
+  word-break: keep-all;
 }
 
 .relic-levelup-table th, .relic-levelup-table td {
@@ -3044,9 +3054,9 @@ h3, h4 {
 
 .unique-table {
   table-layout: auto;
-  width: max-content;
-  min-width: 100%;
+  width: 100%;
   font-size: 12px;
+  word-break: keep-all;
 }
 
 .unique-table th, .unique-table td {
@@ -3055,7 +3065,6 @@ h3, h4 {
 
 .unique-table .unique-name {
   font-weight: bold;
-  white-space: nowrap;
 }
 
 .unique-table td:nth-child(2) {
@@ -3064,30 +3073,13 @@ h3, h4 {
 
 .unique-table .unique-option {
   text-align: left;
-  min-width: 220px;
-}
-
-.unique-random {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 6px;
-}
-
-.unique-random-chip {
-  padding: 3px 9px;
-  border-radius: 11px;
-  background-color: #eef2f7;
-  border: 1px solid #d5dde6;
-  font-size: 11px;
 }
 
 .unique-timeline-table {
   table-layout: auto;
-  width: max-content;
-  min-width: 100%;
+  width: 100%;
   font-size: 12px;
-  white-space: nowrap;
+  word-break: keep-all;
 }
 
 .unique-timeline-table th, .unique-timeline-table td {
