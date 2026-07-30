@@ -30,6 +30,8 @@
     <button :class="{ active: activeTab === 'formation' }" @click="activeTab = 'formation'">승전 진형 편집기</button>
     <button :class="{ active: activeTab === 'league' }" @click="activeTab = 'league'">챌린저스 리그</button>
     <button :class="{ active: activeTab === 'equipGrade' }" @click="activeTab = 'equipGrade'">장비 옵션 등급표</button>
+    <button :class="{ active: activeTab === 'relic' }" @click="activeTab = 'relic'">유물</button>
+    <button :class="{ active: activeTab === 'unique' }" @click="activeTab = 'unique'">유니크</button>
   </div>
 
   <!-- Attack Speed Calculator -->
@@ -853,6 +855,128 @@
     </div>
   </div>
 
+  <!-- Relic -->
+  <div v-show="activeTab === 'relic'">
+    <div class="relic-container">
+      <h3>유물 버프 효과</h3>
+      <p class="rune-note">모든 유물의 수집 확률은 1/30 입니다. 버프 수치는 유물 레벨 1 ~ 10 순서입니다.</p>
+      <div class="rune-scroll">
+        <table class="relic-table">
+          <thead>
+          <tr>
+            <th>유물 명칭</th>
+            <th>버프 효과 (Lv.1 ~ Lv.10)</th>
+            <th>확률</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="r in relics" :key="r.name">
+            <td class="relic-name">{{ r.name }}</td>
+            <td class="relic-effect">{{ r.effect }}</td>
+            <td>{{ r.prob }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>유물 레벨업 필요 개수</h3>
+      <p class="rune-note">각 유물은 1개 획득 시 활성화되며, 이후 레벨업에 필요한 유물 개수입니다.</p>
+      <div class="rune-scroll">
+        <table class="relic-levelup-table">
+          <thead>
+          <tr>
+            <th v-for="l in relicLevelUp" :key="l.step">{{ l.step }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td v-for="l in relicLevelUp" :key="l.step">{{ l.count }}개</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ol class="rune-guide">
+        <h3>⭐ 참고</h3>
+        <li>최대 레벨(Lv.10)에 필요한 수량을 초과해 모은 유물은 <b>유물 초과분 교환</b>으로 1개당 유물 토큰 5개로 바꿀 수 있습니다.</li>
+        <li>v1.376부터 적용된 정보입니다.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Unique -->
+  <div v-show="activeTab === 'unique'">
+    <div class="unique-container">
+      <div class="unique-tabs">
+        <button v-for="m in uniqueModes" :key="m"
+                :class="{ active: uniqueMode === m }" @click="uniqueMode = m">{{ m }}</button>
+      </div>
+
+      <p class="rune-note">
+        {{ uniqueMode }} 모드에서 드랍됩니다. 표시된 단계부터 등장하며, 더 높은 단계에서도 계속 드랍됩니다.
+        일반몬스터 &lt; 보스 &lt; 필드보스 순으로 드랍률이 올라갑니다.
+      </p>
+
+      <div v-for="stage in stagesOf(uniqueMode)" :key="stage" class="unique-stage-group">
+        <h4>{{ uniqueMode }} {{ stage }}</h4>
+        <div class="rune-scroll">
+          <table class="unique-table">
+            <thead>
+            <tr>
+              <th>장비명</th>
+              <th>부위</th>
+              <th>고유옵션</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="u in uniquesOf(uniqueMode, stage)" :key="u.name">
+              <td class="unique-name">{{ u.name }}</td>
+              <td>{{ u.part }}</td>
+              <td class="unique-option">{{ u.option || '옵션 정보 미확보' }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h3>유니크 공통 정보</h3>
+      <ol class="rune-guide">
+        <li>유니크 장비는 <b>총 5개 옵션</b>을 가지며, 고유옵션을 제외한 나머지는 아래 랜덤옵션에서 붙습니다.</li>
+        <li>고유옵션은 개조가 불가하고, 일반옵션은 개조가 가능합니다.</li>
+        <li>모든 유니크 장비에는 무기 전용 랜덤옵션이 붙지 않습니다.</li>
+        <li>어비스 부스트의 유니크는 카오스 부스트보다 아이템 레벨·능력치·옵션 범위가 한 단계 높습니다.</li>
+      </ol>
+
+      <h4>유니크 랜덤옵션 목록</h4>
+      <div class="unique-random">
+        <span v-for="opt in uniqueRandomOptions" :key="opt" class="unique-random-chip">{{ opt }}</span>
+      </div>
+
+      <h3>난이도 추가 시점</h3>
+      <div class="rune-scroll">
+        <table class="unique-timeline-table">
+          <thead>
+          <tr>
+            <th>난이도</th>
+            <th>버전</th>
+            <th>추가 시점</th>
+            <th>비고</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="t in uniqueTimeline" :key="t.stage">
+            <td class="timeline-stage">{{ t.stage }}</td>
+            <td>{{ t.version }}</td>
+            <td>{{ t.date }}</td>
+            <td class="timeline-note">{{ t.note || '-' }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="rune-note">v1.331, v1.367은 사전안내 글 기준 날짜로, 실제 출시는 이후 수일 내입니다.</p>
+    </div>
+  </div>
+
   <div class="maker">
     <div v-for="(credit, i) in currentCredits" :key="i">{{ credit.role }}) {{ credit.name }}</div>
   </div>
@@ -863,6 +987,8 @@ import { dogamSets, boxAItems, boxBItems, chonbiItems, boxes } from './dogamData
 import { petEquipSets } from './petEquipData';
 import { challengerTiers, challengerGroups, rankingRewards, participationRewards } from './challengerData';
 import { equipGrades, equipTierHeaders, equipGradeColors } from './equipGradeData';
+import { relics, relicLevelUp } from './relicData';
+import { uniques, uniqueModes, uniqueRandomOptions, uniqueTimeline } from './uniqueData';
 
 const BOX_SOURCES = ['반짝A', '반짝B', '촌비'];
 
@@ -902,6 +1028,8 @@ export default {
                 formation: [{ role: '제작', name: 'Stella 꼬뱀별' }],
                 league: [{ role: '제작', name: 'Stella 꼬뱀별' }],
                 equipGrade: [{ role: '제작', name: 'Stella 꼬뱀별' }],
+                relic: [{ role: '제작', name: 'Stella 꼬뱀별' }],
+                unique: [{ role: '제작', name: 'Stella 꼬뱀별' }],
               },
         // Attack Speed Calculator
         job: '',
@@ -1059,6 +1187,15 @@ export default {
         equipTierHeaders,
         equipGradeTier: '태초',
 
+        // Relic / Unique
+        relics,
+        relicLevelUp,
+        uniques,
+        uniqueModes,
+        uniqueRandomOptions,
+        uniqueTimeline,
+        uniqueMode: '카오스 부스트',
+
         // Formation Editor
         formation: { mine: new Array(16).fill(null), enemy: new Array(16).fill(null) },
         newUnit: { name: '', job: '', side: 'mine' },
@@ -1156,6 +1293,18 @@ export default {
     },
     currentEquipGrade() {
       return equipGrades.find(g => g.id === this.equipGradeTier) || equipGrades[0];
+    },
+    stagesOf() {
+      return mode => {
+        const seen = [];
+        uniques.forEach(u => {
+          if (u.mode === mode && seen.indexOf(u.stage) === -1) seen.push(u.stage);
+        });
+        return seen;
+      };
+    },
+    uniquesOf() {
+      return (mode, stage) => uniques.filter(u => u.mode === mode && u.stage === stage);
     },
     equipGradeHeadStyle() {
       return h => {
@@ -2817,6 +2966,142 @@ h3, h4 {
 
 .equip-grade-table tbody td {
   font-weight: bold;
+}
+
+/* Relic Styles */
+.relic-container {
+  margin-top: 20px;
+}
+
+.relic-table {
+  table-layout: auto;
+  width: max-content;
+  min-width: 100%;
+  font-size: 12px;
+}
+
+.relic-table th, .relic-table td {
+  padding: 6px 8px;
+}
+
+.relic-table .relic-name {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.relic-table .relic-effect {
+  text-align: left;
+  min-width: 260px;
+}
+
+.relic-levelup-table {
+  table-layout: auto;
+  width: max-content;
+  min-width: 100%;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.relic-levelup-table th, .relic-levelup-table td {
+  padding: 6px 6px;
+}
+
+.relic-levelup-table td {
+  font-weight: bold;
+}
+
+/* Unique Styles */
+.unique-container {
+  margin-top: 20px;
+}
+
+.unique-tabs {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.unique-tabs button {
+  flex: 1 1 40%;
+  max-width: 200px;
+  font-size: 14px;
+}
+
+.unique-tabs button.active {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.unique-stage-group {
+  margin-bottom: 18px;
+}
+
+.unique-stage-group h4 {
+  text-align: left;
+  margin-bottom: 6px;
+}
+
+.unique-table {
+  table-layout: auto;
+  width: max-content;
+  min-width: 100%;
+  font-size: 12px;
+}
+
+.unique-table th, .unique-table td {
+  padding: 6px 8px;
+}
+
+.unique-table .unique-name {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.unique-table td:nth-child(2) {
+  white-space: nowrap;
+}
+
+.unique-table .unique-option {
+  text-align: left;
+  min-width: 220px;
+}
+
+.unique-random {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.unique-random-chip {
+  padding: 3px 9px;
+  border-radius: 11px;
+  background-color: #eef2f7;
+  border: 1px solid #d5dde6;
+  font-size: 11px;
+}
+
+.unique-timeline-table {
+  table-layout: auto;
+  width: max-content;
+  min-width: 100%;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.unique-timeline-table th, .unique-timeline-table td {
+  padding: 6px 8px;
+}
+
+.unique-timeline-table .timeline-stage {
+  font-weight: bold;
+  text-align: left;
+}
+
+.unique-timeline-table .timeline-note {
+  text-align: left;
+  white-space: normal;
 }
 
 .reward-table {
