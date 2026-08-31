@@ -350,6 +350,7 @@
         </tbody>
       </table>
       <div class="kills-buttons">
+        <button @click="fillCurrentTime">현재시간입력</button>
         <button @click="addKillsRecord">행 추가</button>
         <button @click="resetKillsRecords">표 전체 초기화</button>
         <button @click="resetExcludingLastKillsRecord">마지막 기록 빼고 초기화</button>
@@ -357,6 +358,7 @@
       <ol class="kills-guide">
         <h3>⭐ 사용 가이드</h3>
         <li>첫 번째 행에 현재 **월, 일, 시, 분**과 **촌장의 마리수**를 입력하세요.</li>
+        <li>**현재시간입력** 버튼을 누르면 다음 빈 행에 현재 월, 일, 시, 분이 입력됩니다. 빈 행이 없으면 새 행이 자동으로 추가됩니다.</li>
         <li>일정 시간 뒤, 다시 접속하여 다음 행에 업데이트된 **월, 일, 시, 분**과 **촌장의 마리수**를 입력하면 이전 기록과의 차이를 바탕으로 **시간당 킬수**가 계산됩니다.</li>
         <li>**행 추가** 버튼을 통해 기록을 위한 새로운 빈 행을 계속 추가할 수 있습니다.</li>
         <li>**표 전체 초기화** 버튼을 누르면 현재 표의 모든 기록이 지워지고, 초기 상태인 4개의 빈 행만 남습니다.</li>
@@ -1736,6 +1738,22 @@ export default {
     // Kills Calculator Methods
     addKillsRecord() {
       this.killsRecords.push({ month: null, day: null, hour: null, minute: null, kills: null, kph: null });
+    },
+    fillCurrentTime() {
+      let targetRecord = this.killsRecords.find(record =>
+        [record.month, record.day, record.hour, record.minute].every(value => value === null || value === '')
+      );
+
+      if (!targetRecord) {
+        this.addKillsRecord();
+        targetRecord = this.killsRecords[this.killsRecords.length - 1];
+      }
+
+      const now = new Date();
+      targetRecord.month = now.getMonth() + 1;
+      targetRecord.day = now.getDate();
+      targetRecord.hour = now.getHours();
+      targetRecord.minute = now.getMinutes();
     },
     resetKillsRecords() {
       this.killsRecords = [
