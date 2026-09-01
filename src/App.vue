@@ -2,36 +2,36 @@
   <!-- Modal -->
   <div v-if="isOpened" class="black-bg" @click="isOpened=false">
     <div class="white-bg">
-      <h4>공속 계산식</h4>
-      <p>최종 공속 =
-        무기 공속 * (1 - 스탯공속 - 성격공속 - 비법공속 - 연합공속 - 펫장비 - 장비공속) / (1 + 퓨리공속증가량 + 퀴큰공속증가량)</p>
+      <h4>Công thức tính tốc đánh</h4>
+      <p>Tốc đánh cuối =
+        Tốc đánh vũ khí * (1 - chỉ số - tính cách - bí pháp - liên minh - trang bị thú cưng - trang bị) / (1 + Fury + Quicken)</p>
       <p>{{ final_speed }} =
         {{ weapon_speed }} * (1 - {{ stat }} - {{ personality }} - {{ secret / 100 }} - {{ union_speed / 100 }} - {{ pet_equipment / 100 }} -
         {{ equip_speed / 100 }}) / (1 + {{ fury - 1 }} + {{ quicken - 1 }})</p>
     </div>
   </div>
 
-  <a href="/evil_hunter_tycoon"><img alt="evt_title" class="title_img" src="./assets/eht_title.png"></a>
+  <a href="/evil_hunter_tycoon_vh/"><img alt="Evil Hunter Tycoon Việt hóa" class="title_img" src="./assets/eht_title.png"></a>
   <div>
-    <a class="hits" href="https://hits.sh/ggobemiya.github.io/evil_hunter_tycoon/">
-      <img alt="Hits" src="https://hits.sh/ggobemiya.github.io/evil_hunter_tycoon.svg?view=today-total"/>
+    <a class="hits" href="https://hits.sh/hwihuang-az.github.io/evil_hunter_tycoon_vh/">
+      <img alt="Lượt truy cập" src="https://hits.sh/hwihuang-az.github.io/evil_hunter_tycoon_vh.svg?view=today-total"/>
     </a>
-    <h2>이블 헌터 타이쿤 계산기</h2>
+    <h2>Bộ công cụ Evil Hunter Tycoon Việt Nam</h2>
   </div>
 
   <!-- Tab Buttons -->
   <div class="tab-buttons">
-    <button :class="{ active: activeTab === 'attack' }" @click="activeTab = 'attack'">공속 계산기</button>
-    <button :class="{ active: activeTab === 'move' }" @click="activeTab = 'move'">이속 계산기</button>
-    <button :class="{ active: activeTab === 'kills' }" @click="activeTab = 'kills'">킬수 계산기</button>
-    <button :class="{ active: activeTab === 'rune' }" @click="activeTab = 'rune'">룬 획득 정보</button>
-    <button :class="{ active: activeTab === 'dogam' }" @click="activeTab = 'dogam'">도감 / 확률</button>
-    <button :class="{ active: activeTab === 'pet' }" @click="activeTab = 'pet'">펫 장비</button>
-    <button :class="{ active: activeTab === 'formation' }" @click="activeTab = 'formation'">승전 진형 편집기</button>
-    <button :class="{ active: activeTab === 'league' }" @click="activeTab = 'league'">챌린저스 리그</button>
-    <button :class="{ active: activeTab === 'equipGrade' }" @click="activeTab = 'equipGrade'">장비 옵션 등급표</button>
-    <button :class="{ active: activeTab === 'relic' }" @click="activeTab = 'relic'">유물</button>
-    <button :class="{ active: activeTab === 'unique' }" @click="activeTab = 'unique'">유니크</button>
+    <button :class="{ active: activeTab === 'attack' }" @click="activeTab = 'attack'">Tốc đánh</button>
+    <button :class="{ active: activeTab === 'move' }" @click="activeTab = 'move'">Tốc chạy</button>
+    <button :class="{ active: activeTab === 'kills' }" @click="activeTab = 'kills'">Số quái hạ</button>
+    <button :class="{ active: activeTab === 'rune' }" @click="activeTab = 'rune'">Thông tin Rune</button>
+    <button :class="{ active: activeTab === 'dogam' }" @click="activeTab = 'dogam'">Bộ sưu tập / Tỉ lệ</button>
+    <button :class="{ active: activeTab === 'pet' }" @click="activeTab = 'pet'">Trang bị thú cưỡi</button>
+    <button :class="{ active: activeTab === 'formation' }" @click="activeTab = 'formation'">Xếp đội hình</button>
+    <button :class="{ active: activeTab === 'league' }" @click="activeTab = 'league'">Giải Thách Đấu</button>
+    <button :class="{ active: activeTab === 'equipGrade' }" @click="activeTab = 'equipGrade'">Hạng tùy chọn trang bị</button>
+    <button :class="{ active: activeTab === 'relic' }" @click="activeTab = 'relic'">Di vật</button>
+    <button :class="{ active: activeTab === 'unique' }" @click="activeTab = 'unique'">Trang bị Độc nhất</button>
   </div>
 
   <!-- Attack Speed Calculator -->
@@ -46,73 +46,73 @@
       <tbody>
       <td>
         <select v-model.trim.number="job" @change="change_job">
-          <option disabled value="">선택</option>
-          <option value="0">버서커</option>
-          <option value="1">소서러</option>
-          <option value="2">레인져</option>
-          <option value="3">팔라딘</option>
-          <option value="4">다크나이트</option>
+          <option disabled value="">Chọn nghề</option>
+          <option value="0">Berserker</option>
+          <option value="1">Pháp sư</option>
+          <option value="2">Xạ thủ</option>
+          <option value="3">Paladin</option>
+          <option value="4">Kỵ sĩ Bóng Đêm</option>
         </select>
       </td>
       <td v-show="job===''"></td>
       <td v-show="job===0">
         <select v-model.trim.number="weapon_speed" @change="weapon_speed_cal">
-          <option disabled value="">선택</option>
-          <option value="2">고대,원시</option>
-          <option value="2.2">콜로,월보</option>
+          <option disabled value="">Chọn</option>
+          <option value="2">Cổ Đại,Nguyên Thủy</option>
+          <option value="2.2">Colosseum,Boss Thế Giới</option>
         </select>
       </td>
       <td v-show="job===1 || job===4">
         <select v-model.trim.number="weapon_speed" @change="weapon_speed_cal">
-          <option disabled value="">선택</option>
-          <option value="2.2">고대,원시</option>
-          <option value="2.3">콜로,월보</option>
+          <option disabled value="">Chọn</option>
+          <option value="2.2">Cổ Đại,Nguyên Thủy</option>
+          <option value="2.3">Colosseum,Boss Thế Giới</option>
         </select>
       </td>
       <td v-show="job===2">
         <select v-model.trim.number="weapon_speed" @change="weapon_speed_cal">
-          <option disabled value="">선택</option>
-          <option value="1.8">고대,원시</option>
-          <option value="2">콜로,월보</option>
+          <option disabled value="">Chọn</option>
+          <option value="1.8">Cổ Đại,Nguyên Thủy</option>
+          <option value="2">Colosseum,Boss Thế Giới</option>
         </select>
       </td>
       <td v-show="job===3">
         <select v-model.trim.number="weapon_speed" @change="weapon_speed_cal">
-          <option disabled value="">선택</option>
-          <option value="2.4">고대,원시</option>
-          <option value="2.5">콜로,월보</option>
+          <option disabled value="">Chọn</option>
+          <option value="2.4">Cổ Đại,Nguyên Thủy</option>
+          <option value="2.5">Colosseum,Boss Thế Giới</option>
         </select>
       </td>
       <td>
         <select v-model.trim.number="stat" @change="weapon_speed_cal">
-          <option disabled value="">선택</option>
-          <option value="0">회색</option>
-          <option value="0.1">파란색</option>
-          <option value="0.2">주황색</option>
-          <option value="0.3">보라색</option>
+          <option disabled value="">Chọn</option>
+          <option value="0">Xám</option>
+          <option value="0.1">Xanh lam</option>
+          <option value="0.2">Cam</option>
+          <option value="0.3">Tím</option>
         </select>
       </td>
       <td>
         <select v-model.trim.number="personality" @change="weapon_speed_cal">
-          <option disabled value="">선택</option>
-          <option value="0">효과 없음</option>
-          <option value="-0.1">둔한</option>
-          <option value="0.07">영웅심리</option>
-          <option value="0.1">날쌘돌이</option>
+          <option disabled value="">Chọn</option>
+          <option value="0">Không có hiệu ứng</option>
+          <option value="-0.1">Chậm chạp</option>
+          <option value="0.07">Tinh thần Anh hùng</option>
+          <option value="0.1">Nhanh nhẹn</option>
         </select>
       </td>
       <td>
-        <input v-model.trim.number="secret" max="10" min="0" onfocus="this.value=''" placeholder="입력(%)" step="0.1"
+        <input v-model.trim.number="secret" max="10" min="0" onfocus="this.value=''" placeholder="Nhập(%)" step="0.1"
                type="number" @input="weapon_speed_cal">
       </td>
       <td>
-        <input v-model.trim.number="union_speed" max="5" min="0" onfocus="this.value=''" placeholder="입력(%)" type="number"
+        <input v-model.trim.number="union_speed" max="5" min="0" onfocus="this.value=''" placeholder="Nhập(%)" type="number"
                @input="weapon_speed_cal">
       </td>
       <td>
         <select v-model.trim.number="pet_equipment" @change="weapon_speed_cal">
-          <option disabled value="">선택</option>
-          <option value="0">없음</option>
+          <option disabled value="">Chọn</option>
+          <option value="0">Không có</option>
           <option value="6">B</option>
           <option value="9">A</option>
           <option value="12">S</option>
@@ -120,7 +120,7 @@
       </td>
       <td>
         <select v-model.trim.number="quicken" @change="weapon_speed_cal">
-          <option disabled value="">선택</option>
+          <option disabled value="">Chọn</option>
           <option value="1">Lv.0</option>
           <option value="1.1">Lv.1</option>
           <option value="1.2">Lv.2</option>
@@ -131,7 +131,7 @@
       </td>
       <td>
         <select v-model.trim.number="fury" @change="weapon_speed_cal">
-          <option disabled value="">선택</option>
+          <option disabled value="">Chọn</option>
           <option value="1">Lv.0</option>
           <option value="2.38">Lv.1</option>
           <option value="4">Lv.10</option>
@@ -144,30 +144,31 @@
     </table>
     </div>
     <div class="equip">
-      <span>룬, 장비 공속: </span>
-      <input v-model.trim.number="equip_speed" max="100" min="0" placeholder="입력(%)" type="number"
+      <span>Tốc đánh từ Rune và trang bị: </span>
+      <input v-model.trim.number="equip_speed" max="100" min="0" placeholder="Nhập(%)" type="number"
              @input="final_speed_cal">
     </div>
     <div class="final">
-      <span>최종 공속: </span>
-      <input v-model.trim.number="final_speed" max="3" min="0.25" placeholder="입력(%)" step="0.01" type="number"
+      <span>Tốc đánh cuối: </span>
+      <input v-model.trim.number="final_speed" max="3" min="0.25" placeholder="Nhập(%)" step="0.01" type="number"
              @input="weapon_speed_cal">
       <br>
-      <button @click="isOpened=true">공속 계산식</button>
+      <button @click="isOpened=true">Xem công thức</button>
     </div>
     <ol>
-      <h3>⭐ ️참고</h3>
-      <li>직업을 선택하세요.</li>
-      <li>무기, 스탯, 성격, 퀴큰, 퓨리를 선택 / 비법, 연합공속을 입력하세요.</li>
-      <li>퓨리룬 Lv1,2,3 장착시 퓨리 Lv11,12,13 선택하면 됩니다.</li>
-      <li><span class="final_inline">최종 공속</span> 0.25를 기준으로 <span class="equip_inline">룬, 장비 공속</span>이 계산됩니다. <span
-          class="final_inline">최종 공속</span>
-        수정도 가능합니다.
+      <h3>⭐ ️Ghi Chú</h3>
+      <li>Chọn nghề của Thợ Săn.</li>
+      <li>Chọn vũ khí, chỉ số, tính cách, Quicken và Fury; sau đó nhập Bí pháp và tốc đánh Liên Minh.</li>
+      <li>Nếu trang bị Rune Fury Lv.1/2/3, hãy chọn Fury Lv.11/12/13 tương ứng.</li>
+      <li>Dựa trên <span class="final_inline">tốc đánh cuối</span> mặc định 0,25, công cụ sẽ tính
+        <span class="equip_inline">tốc đánh cần có từ Rune và trang bị</span>. Bạn cũng có thể sửa trực tiếp
+        <span class="final_inline">tốc đánh cuối</span>.
       </li>
-      <li><span class="equip_inline">룬, 장비 공속</span> 수정 시 그에 따른 <span class="final_inline">최종 공속</span>이 계산됩니다.</li>
-      <li>정확도를 위해서 반올림 안했습니다.</li>
-      <li>ex) <span class="equip_inline">룬, 장비 공속</span>이 82.955면 83을 맞춰야 합니다.</li>
-      <li>ex) <span class="final_inline">최종 공속</span>이 0.255면 인게임 표기는 0.25지만 초당 공격력은 0.255로 계산됩니다.</li>
+      <li>Khi sửa <span class="equip_inline">tốc đánh từ Rune và trang bị</span>, công cụ sẽ tính lại
+        <span class="final_inline">tốc đánh cuối</span>.</li>
+      <li>Kết quả không được làm tròn để giữ độ chính xác.</li>
+      <li>Ví dụ: nếu kết quả cần 82,955% tốc đánh từ Rune và trang bị, bạn phải đạt ít nhất 83%.</li>
+      <li>Ví dụ: tốc đánh thực là 0,255 có thể hiển thị 0,25 trong game, nhưng sát thương mỗi giây vẫn được tính theo 0,255.</li>
     </ol>
   </div>
 
@@ -176,79 +177,79 @@
     <table class="move-speed-table">
       <tbody>
       <tr>
-        <td>헌터 등급 버프</td>
+        <td>Buff hạng Thợ Săn</td>
         <td>
           <select v-model.number="moveBuffs.hunterRank">
-            <option value="0">없음</option>
-            <option value="10">H (히로익)</option>
-            <option value="20">L (레전더리)</option>
-            <option value="30">U (울티메이트)</option>
+            <option value="0">Không có</option>
+            <option value="10">H (Anh hùng)</option>
+            <option value="20">L (Huyền thoại)</option>
+            <option value="30">U (Tối thượng)</option>
           </select>
         </td>
       </tr>
       <tr>
-        <td>건물 (0 ~ 50)</td>
+        <td>Công trình (0–50)</td>
         <td class="slider-cell">
           <input type="range" min="0" max="50" step="1" v-model.number="moveBuffs.building">
           <input type="number" min="0" max="50" v-model.number="moveBuffs.building" class="slider-input">
         </td>
       </tr>
       <tr>
-        <td>코스튬 (옷)</td>
+        <td>Ngoại trang (trang phục)</td>
         <td>
           <select v-model.number="moveBuffs.clothes">
-            <option value="0">미적용</option>
-            <option value="40">적용</option>
+            <option value="0">Không áp dụng</option>
+            <option value="40">Áp dụng</option>
           </select>
         </td>
       </tr>
       <tr>
-        <td>코스튬 (날개)</td>
+        <td>Ngoại trang (cánh)</td>
         <td>
           <select v-model.number="moveBuffs.wings">
-            <option value="0">미적용</option>
-            <option value="20">적용</option>
+            <option value="0">Không áp dụng</option>
+            <option value="20">Áp dụng</option>
           </select>
         </td>
       </tr>
       <tr>
-        <td>인장</td>
+        <td>Ấn chương</td>
         <td>
           <select v-model.number="moveBuffs.seal">
-            <option value="0">미적용</option>
-            <option value="20">적용</option>
+            <option value="0">Không áp dụng</option>
+            <option value="20">Áp dụng</option>
           </select>
         </td>
       </tr>
       <tr>
-        <td>라이딩</td>
+        <td>Thú cưỡi</td>
         <td>
           <select v-model.number="moveBuffs.riding">
-            <option value="0">미적용</option>
-            <option value="30">적용</option>
+            <option value="0">Không áp dụng</option>
+            <option value="30">Áp dụng</option>
           </select>
         </td>
       </tr>
       <tr>
-        <td>비법 (0 ~ 15)</td>
+        <td>Bí pháp (0–15)</td>
         <td class="slider-cell">
           <input type="range" min="0" max="15" step="1" v-model.number="moveBuffs.secret">
           <input type="number" min="0" max="15" v-model.number="moveBuffs.secret" class="slider-input">
         </td>
       </tr>
        <tr>
-        <td>룬</td>
-        <td><input type="number" v-model.number="moveBuffs.rune" placeholder="입력" class="full-width-input"></td>
+        <td>Rune</td>
+        <td><input type="number" v-model.number="moveBuffs.rune" placeholder="Nhập" class="full-width-input"></td>
       </tr>
       <tr>
-        <td>질풍신 포함 장비 이속 총합</td>
-        <td><input type="number" v-model.number="moveBuffs.equipmentTotal" placeholder="입력" class="full-width-input"></td>
+        <td>Tổng tốc chạy trang bị, gồm Thần Gió</td>
+        <td><input type="number" v-model.number="moveBuffs.equipmentTotal" placeholder="Nhập" class="full-width-input"></td>
       </tr>
       <tr>
-        <td>라이딩 장비 (편자)</td>
+        <td>Trang bị thú cưỡi (móng sắt)</td>
         <td>
           <select v-model.number="moveBuffs.horseshoe">
-            <option value="0">없음</option>
+            <option value="0">Không có</option>
             <option value="15">B</option>
             <option value="30">A</option>
             <option value="45">S</option>
@@ -256,59 +257,59 @@
         </td>
       </tr>
       <tr>
-        <td>성격</td>
+        <td>Tính cách</td>
         <td>
           <select v-model.number="moveBuffs.personality">
-            <option value="0">없음</option>
-            <option value="10">달리기가 빠른</option>
-            <option value="7">영웅심리</option>
+            <option value="0">Không có</option>
+            <option value="10">Chạy nhanh</option>
+            <option value="7">Tinh thần Anh hùng</option>
           </select>
         </td>
       </tr>
       <tr>
-        <td>프로즌소울 (글레이셜 보우)</td>
+        <td>Linh Hồn Băng Giá (Cung Băng Hà)</td>
         <td>
           <select v-model.number="moveBuffs.frozenSoul">
-            <option value="0">미적용</option>
-            <option value="80">적용</option>
+            <option value="0">Không áp dụng</option>
+            <option value="80">Áp dụng</option>
           </select>
         </td>
       </tr>
       <tr>
-        <td>대악마 (원시,태초,혼돈,심연 무기)</td>
+        <td>Đại Ác Ma (Vũ khí Nguyên Thủy, Khởi Nguyên, Hỗn Mang, Vực Thẳm)</td>
         <td>
           <select v-model.number="moveBuffs.greatDemon">
-            <option value="0">미적용</option>
-            <option value="200">적용</option>
+            <option value="0">Không áp dụng</option>
+            <option value="200">Áp dụng</option>
           </select>
         </td>
       </tr>
       </tbody>
     </table>
     <div class="move-speed-results">
-      <h3>계산 결과</h3>
+      <h3>Kết quả tính toán</h3>
       <div class="result-item">
-        <span class="label">총 이동속도 증가량 (합계):</span>
+        <span class="label">Tổng mức tăng tốc chạy:</span>
         <span class="value">{{ totalMoveSpeed }}</span>
       </div>
       <div class="result-item result-note">
-        <span class="label">질풍신 공격력 증폭 (최대 30%)</span>
+        <span class="label">Khuếch đại Công của Thần Cuồng Phong (tối đa 30%)</span>
       </div>
       <div class="result-item result-note">
-        <span class="label">진 질풍신 공격력 증폭 (최대 40%)</span>
+        <span class="label">Khuếch đại Công của Chân Thần Cuồng Phong (tối đa 40%)</span>
       </div>
     </div>
 
     <div class="requirement-table-container">
-        <h4>증폭률별 요구 이속량</h4>
+        <h4>Tốc chạy yêu cầu theo mức khuếch đại</h4>
         <table>
             <thead>
                 <tr>
-                    <th>증폭률</th>
-                    <th>질풍신(30%) 요구값</th>
-                    <th>부족한 값(증폭률)</th>
-                    <th>진 질풍신(40%) 요구값</th>
-                    <th>부족한 값(증폭률)</th>
+                    <th>Mức khuếch đại</th>
+                    <th>Thần Cuồng Phong (30%)</th>
+                    <th>Mức khuếch đại còn thiếu</th>
+                    <th>Chân Thần Cuồng Phong (40%)</th>
+                    <th>Mức khuếch đại còn thiếu</th>
                 </tr>
             </thead>
             <tbody>
@@ -330,39 +331,39 @@
       <table>
         <thead>
           <tr>
-            <th>월</th>
-            <th>일</th>
-            <th>시</th>
-            <th>분</th>
-            <th>마리수</th>
-            <th>시간당킬수</th>
+            <th>Tháng</th>
+            <th>Ngày</th>
+            <th>Giờ</th>
+            <th>Phút</th>
+            <th>Số quái</th>
+            <th>Quái/giờ</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(record, index) in killsRecords" :key="index">
-            <td><input type="number" v-model.number="record.month" min="1" max="12" placeholder="월"></td>
-            <td><input type="number" v-model.number="record.day" min="1" max="31" placeholder="일"></td>
-            <td><input type="number" v-model.number="record.hour" min="0" max="23" placeholder="시"></td>
-            <td><input type="number" v-model.number="record.minute" min="0" max="59" placeholder="분"></td>
-            <td><input type="number" v-model.number="record.kills" min="0" placeholder="마리수"></td>
+            <td><input type="number" v-model.number="record.month" min="1" max="12" placeholder="Tháng"></td>
+            <td><input type="number" v-model.number="record.day" min="1" max="31" placeholder="Ngày"></td>
+            <td><input type="number" v-model.number="record.hour" min="0" max="23" placeholder="Giờ"></td>
+            <td><input type="number" v-model.number="record.minute" min="0" max="59" placeholder="Phút"></td>
+            <td><input type="number" v-model.number="record.kills" min="0" placeholder="Số quái"></td>
             <td><input type="text" :value="record.kph !== null ? record.kph : ''" readonly class="kpm-display-input"></td>
           </tr>
         </tbody>
       </table>
       <div class="kills-buttons">
-        <button @click="fillCurrentTime">현재시간입력</button>
-        <button @click="addKillsRecord">행 추가</button>
-        <button @click="resetKillsRecords">표 전체 초기화</button>
-        <button @click="resetExcludingLastKillsRecord">마지막 기록 빼고 초기화</button>
+        <button @click="fillCurrentTime">Điền giờ hiện tại</button>
+        <button @click="addKillsRecord">Thêm dòng</button>
+        <button @click="resetKillsRecords">Xóa toàn bộ bảng</button>
+        <button @click="resetExcludingLastKillsRecord">Giữ bản ghi cuối và đặt lại</button>
       </div>
       <ol class="kills-guide">
-        <h3>⭐ 사용 가이드</h3>
-        <li>첫 번째 행에 현재 **월, 일, 시, 분**과 **촌장의 마리수**를 입력하세요.</li>
-        <li>**현재시간입력** 버튼을 누르면 다음 빈 행에 현재 월, 일, 시, 분이 입력됩니다. 빈 행이 없으면 새 행이 자동으로 추가됩니다.</li>
-        <li>일정 시간 뒤, 다시 접속하여 다음 행에 업데이트된 **월, 일, 시, 분**과 **촌장의 마리수**를 입력하면 이전 기록과의 차이를 바탕으로 **시간당 킬수**가 계산됩니다.</li>
-        <li>**행 추가** 버튼을 통해 기록을 위한 새로운 빈 행을 계속 추가할 수 있습니다.</li>
-        <li>**표 전체 초기화** 버튼을 누르면 현재 표의 모든 기록이 지워지고, 초기 상태인 4개의 빈 행만 남습니다.</li>
-        <li>**마지막 기록 빼고 초기화** 버튼은 표가 너무 길어졌을 때 유용합니다. 이 버튼을 누르면 마지막으로 '월, 일, 시, 분, 마리수'가 모두 채워진 유효한 기록만 첫 번째 행으로 남기고, 나머지 기록은 모두 지워져 초기 상태(총 4개 행)로 돌아갑니다. 마지막 기록이 불완전할 경우, 표 전체가 초기화됩니다.</li>
+        <h3>⭐ Hướng dẫn sử dụng</h3>
+        <li>Ở dòng đầu tiên, nhập tháng, ngày, giờ, phút hiện tại và tổng số quái của Thị trưởng.</li>
+        <li>Nút <b>Điền giờ hiện tại</b> sẽ điền thời gian vào dòng trống kế tiếp; nếu hết dòng trống, hệ thống tự thêm dòng mới.</li>
+        <li>Sau một khoảng thời gian, nhập thời gian và tổng số quái mới ở dòng kế tiếp. Công cụ sẽ tính số quái hạ được mỗi giờ dựa trên chênh lệch giữa hai bản ghi.</li>
+        <li>Dùng nút <b>Thêm dòng</b> khi muốn ghi thêm dữ liệu.</li>
+        <li>Nút <b>Xóa toàn bộ bảng</b> sẽ xóa mọi bản ghi và đưa bảng về bốn dòng trống ban đầu.</li>
+        <li>Nút <b>Giữ bản ghi cuối và đặt lại</b> sẽ giữ bản ghi hợp lệ gần nhất ở dòng đầu rồi xóa các dòng còn lại. Nếu bản ghi cuối chưa đủ dữ liệu, toàn bộ bảng sẽ được đặt lại.</li>
       </ol>
     </div>
   </div>
@@ -371,26 +372,26 @@
   <div v-show="activeTab === 'rune'">
     <div class="rune-container">
       <div class="rune-floor-finder">
-        <span class="rune-finder-label">현재 층</span>
-        <input type="number" min="1" max="300" v-model.number="currentFloor" placeholder="예) 235">
+        <span class="rune-finder-label">Tầng hiện tại</span>
+        <input type="number" min="1" max="300" v-model.number="currentFloor" placeholder="Ví dụ: 235">
         <div class="rune-floor-result" v-if="currentFloorStages">
           <span v-for="s in currentFloorStages" :key="s.name" class="floor-chip" :style="s.style">
             {{ s.name }} · {{ s.text }}
           </span>
         </div>
-        <div class="rune-floor-result rune-floor-empty" v-else>1 ~ 300 사이의 층을 입력하면 해당 위치를 표에서 짚어줍니다.</div>
+        <div class="rune-floor-result rune-floor-empty" v-else>Nhập một tầng từ 1 đến 300 để đánh dấu vị trí tương ứng trong bảng.</div>
       </div>
 
-      <h3>룬 획득 층</h3>
-      <p class="rune-note">칸 하나가 하나의 단계 구간입니다. 색이 진할수록 높은 단계입니다.</p>
+      <h3>Tầng nhận Rune</h3>
+      <p class="rune-note">Mỗi ô tương ứng một khoảng cấp. Màu càng đậm thì cấp càng cao.</p>
 
       <div v-for="block in [0, 1, 2]" :key="block" class="rune-block">
-        <h4>{{ block * 100 + 1 }} ~ {{ block * 100 + 100 }}층</h4>
+        <h4>{{ block * 100 + 1 }} ~ {{ block * 100 + 100 }} tầng</h4>
         <div class="rune-scroll">
           <table class="rune-matrix">
             <thead>
             <tr>
-              <th class="rune-row-label">룬 구분</th>
+              <th class="rune-row-label">Loại Rune</th>
               <th v-for="h in blockHeaders(block)" :key="h.from">{{ h.from }}<br>~{{ h.to }}</th>
             </tr>
             </thead>
@@ -401,7 +402,7 @@
                   :colspan="cell.span"
                   :class="{ 'rune-empty': cell.stage === null, 'rune-active': isActiveCell(cell) }"
                   :style="cell.stage === null ? null : bandStyle(row, cell.stage)">
-                {{ cell.stage === null ? '미출현' : cell.stage + '단계' }}
+                {{ cell.stage === null ? 'Chưa xuất hiện' : 'Cấp ' + cell.stage }}
               </td>
             </tr>
             </tbody>
@@ -409,19 +410,19 @@
         </div>
       </div>
 
-      <h3>스탯 룬 옵션 수치</h3>
-      <p class="rune-note">단계별 <b>최대치</b>입니다. 같은 그룹 안에서는 옵션 종류와 상관없이 수치가 같습니다.</p>
+      <h3>Chỉ số tùy chọn của Rune</h3>
+      <p class="rune-note">Đây là <b>giá trị tối đa</b> theo từng cấp. Các tùy chọn trong cùng một nhóm có giá trị như nhau.</p>
       <div class="rune-scroll">
         <table class="rune-option-table">
           <thead>
           <tr>
-            <th class="rune-row-label">그룹 \ 단계</th>
+            <th class="rune-row-label">Nhóm \ Cấp</th>
             <th v-for="n in 15" :key="n">{{ n }}</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="g in runeOptionGroups" :key="g.label">
-            <th class="rune-row-label">{{ g.label }}그룹</th>
+            <th class="rune-row-label">{{ g.label }} - Nhóm</th>
             <td v-for="(v, i) in g.values" :key="i">{{ v }}</td>
           </tr>
           </tbody>
@@ -429,30 +430,30 @@
       </div>
       <div class="rune-group-list">
         <div v-for="g in runeOptionGroups" :key="g.label" class="rune-group-item">
-          <div class="rune-group-head"><span class="rune-group-badge">{{ g.label }}</span>{{ g.title }} ({{ g.options.length }}종)</div>
+          <div class="rune-group-head"><span class="rune-group-badge">{{ g.label }}</span>{{ g.title }} ({{ g.options.length }} loại)</div>
           <div class="rune-group-options">{{ g.options.join(', ') }}</div>
         </div>
       </div>
 
-      <h3>스킬룬 목록</h3>
+      <h3>Danh sách Rune kỹ năng</h3>
       <table class="rune-skill-table">
         <tbody>
         <tr v-for="t in skillRuneList" :key="t.tier">
-          <th>{{ t.tier }}<br>({{ t.runes.length }}종)</th>
+          <th>{{ t.tier }}<br>({{ t.runes.length }} loại)</th>
           <td>{{ t.runes.join(', ') }}</td>
         </tr>
         </tbody>
       </table>
 
       <ol class="rune-guide">
-        <h3>⭐ 참고</h3>
-        <li>모든 룬은 <b>마왕성 앞뜰</b>에서만 나옵니다. 층이 높을수록 높은 단계의 룬이 나옵니다.</li>
-        <li>같은 차수의 스킬룬은 종류와 상관없이 획득 층이 동일합니다.</li>
-        <li>스탯 룬은 1~100층에서 10층마다 1단계씩 올라 91~100층에서 10단계가 되고, 101~200층은 10단계로 유지된 뒤 201층부터 20층마다 1단계씩 올라 15단계가 됩니다.</li>
-        <li>3차 스킬룬만 201~210층에서 3단계가 한 번 더 이어진 뒤 20층 단위로 올라갑니다.</li>
-        <li>11~15단계의 최소 수치는 공개된 자료가 없어 최대치만 표기했습니다.</li>
-        <li>A그룹은 10단계까지 2단계마다 최대치가 1씩 올랐지만, 11단계부터는 1단계마다 1씩 오릅니다.</li>
-        <li>출처: 이블헌터 타이쿤 공식 카페 (룬 옵션표 / 스킬룬 층정보 / 앞뜰 201~300층 룬 정보)</li>
+        <h3>⭐ Ghi Chú</h3>
+        <li>Tất cả Rune chỉ xuất hiện tại <b>Sân trước Thành Ma Vương</b>. Tầng càng cao thì cấp Rune xuất hiện càng cao.</li>
+        <li>Các Rune kỹ năng cùng bậc xuất hiện ở cùng tầng, không phụ thuộc loại kỹ năng.</li>
+        <li>Rune chỉ số tăng 1 cấp sau mỗi 10 tầng từ tầng 1–100 và đạt cấp 10 ở tầng 91–100. Tầng 101–200 giữ cấp 10; từ tầng 201, cứ 20 tầng tăng 1 cấp đến cấp 15.</li>
+        <li>Riêng Rune kỹ năng bậc 3 tiếp tục ở cấp 3 tại tầng 201–210, sau đó tăng theo mỗi 20 tầng.</li>
+        <li>Cấp 11–15 chưa có dữ liệu chính thức về chỉ số tối thiểu nên bảng chỉ hiển thị giá trị tối đa.</li>
+        <li>Nhóm A tăng 1 điểm tối đa sau mỗi 2 cấp đến cấp 10; từ cấp 11, mỗi cấp tăng 1 điểm.</li>
+        <li>Nguồn: cộng đồng chính thức Evil Hunter Tycoon (Bảng tùy chọn Rune / Tầng xuất hiện Rune kỹ năng / Thông tin Rune tầng 201–300)</li>
       </ol>
     </div>
   </div>
@@ -460,26 +461,26 @@
   <!-- Collection / Box Probability -->
   <div v-show="activeTab === 'dogam'">
     <div class="dogam-container">
-      <h3>상자 우선순위</h3>
-      <p class="rune-note">아직 안 뽑은 아이템의 확률을 모두 더한 값입니다. 이 값이 클수록 한 번 열었을 때 새 아이템이 나올 가능성이 높습니다.</p>
+      <h3>Ưu tiên mở rương</h3>
+      <p class="rune-note">Đây là tổng tỉ lệ của các vật phẩm bạn chưa sở hữu. Giá trị càng cao thì cơ hội nhận được vật phẩm mới trong một lần mở càng lớn.</p>
       <table class="dogam-priority">
         <thead>
         <tr>
-          <th>상자</th>
-          <th>남은 종류</th>
-          <th>남은 확률</th>
-          <th>신규 1개당 기대 횟수</th>
+          <th>Rương</th>
+          <th>Loại còn thiếu</th>
+          <th>Tỉ lệ còn lại</th>
+          <th>Số lần mở dự kiến/vật phẩm mới</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="b in boxStats" :key="b.id" :class="{ 'best-box': b.id === bestBoxId }">
           <td class="box-name">
             {{ b.label }}
-            <span v-if="b.id === bestBoxId" class="best-badge">추천</span>
+            <span v-if="b.id === bestBoxId" class="best-badge">Đề xuất</span>
           </td>
-          <td>{{ b.remainCount }} / {{ b.total }}종</td>
+          <td>{{ b.remainCount }} / {{ b.total }} loại</td>
           <td class="remain-rate">{{ b.remainRate }}%</td>
-          <td>{{ b.expected === null ? '완료' : b.expected + '회' }}</td>
+          <td>{{ b.expected === null ? 'Hoàn tất' : b.expected + ' lần' }}</td>
         </tr>
         </tbody>
       </table>
@@ -492,23 +493,23 @@
 
       <div class="dogam-tools">
         <label class="dogam-filter">
-          <input type="checkbox" v-model="dogamHideOwned"> 미보유만 보기
+          <input type="checkbox" v-model="dogamHideOwned"> Chỉ hiện vật phẩm chưa có
         </label>
         <span class="dogam-tool-buttons">
-          <button @click="setSectionOwned(true)">전체 체크</button>
-          <button @click="setSectionOwned(false)">전체 해제</button>
+          <button @click="setSectionOwned(true)">Chọn tất cả</button>
+          <button @click="setSectionOwned(false)">Bỏ chọn tất cả</button>
         </span>
       </div>
 
-      <!-- 도감세트 -->
+      <!-- Bộ sưu tập -->
       <table v-if="dogamSection === 'sets'" class="dogam-table dogam-set-table">
         <thead>
         <tr>
-          <th>분류</th>
-          <th>아이템명</th>
-          <th>출처</th>
-          <th>확률</th>
-          <th>보유</th>
+          <th>Phân loại</th>
+          <th>Tên vật phẩm</th>
+          <th>Nguồn</th>
+          <th>Tỉ lệ</th>
+          <th>Đã sở hữu</th>
         </tr>
         </thead>
         <tbody>
@@ -528,19 +529,19 @@
           </tr>
         </template>
         <tr v-if="!visibleSetGroups.length">
-          <td colspan="5" class="dogam-empty">표시할 항목이 없습니다.</td>
+          <td colspan="5" class="dogam-empty">Không có vật phẩm để hiển thị.</td>
         </tr>
         </tbody>
       </table>
 
-      <!-- 촌장의 비밀상자 -->
-      <table v-else-if="dogamSection === '촌비'" class="dogam-table dogam-chonbi-table">
+      <!-- Rương bí mật Thị trưởng -->
+      <table v-else-if="dogamSection === 'Rương Bí Mật'" class="dogam-table dogam-chonbi-table">
         <thead>
         <tr>
-          <th>분류</th>
-          <th>아이템명</th>
-          <th>확률</th>
-          <th>보유</th>
+          <th>Phân loại</th>
+          <th>Tên vật phẩm</th>
+          <th>Tỉ lệ</th>
+          <th>Đã sở hữu</th>
         </tr>
         </thead>
         <tbody>
@@ -550,24 +551,24 @@
           <td>{{ it.rate }}%</td>
           <td>
             <input v-if="it.key" type="checkbox" :checked="isOwned(it.key)" @change="toggleOwned(it.key)">
-            <span v-else class="not-collectible">비수집</span>
+            <span v-else class="not-collectible">Không sưu tầm</span>
           </td>
         </tr>
         <tr v-if="!visibleChonbiItems.length">
-          <td colspan="4" class="dogam-empty">표시할 항목이 없습니다.</td>
+          <td colspan="4" class="dogam-empty">Không có vật phẩm để hiển thị.</td>
         </tr>
         </tbody>
       </table>
 
-      <!-- 반짝반짝 코스튬 상자 A / B -->
+      <!-- Lấp Lánh Ngoại trang Rương A / B -->
       <table v-else class="dogam-table dogam-box-table">
         <thead>
         <tr>
-          <th>분류</th>
-          <th>아이템명</th>
-          <th>도감효과</th>
-          <th>확률</th>
-          <th>보유</th>
+          <th>Phân loại</th>
+          <th>Tên vật phẩm</th>
+          <th>Bộ sưu tậpHiệu ứng</th>
+          <th>Tỉ lệ</th>
+          <th>Đã sở hữu</th>
         </tr>
         </thead>
         <tbody>
@@ -579,19 +580,19 @@
           <td><input type="checkbox" :checked="isOwned(it.key)" @change="toggleOwned(it.key)"></td>
         </tr>
         <tr v-if="!visibleBoxItems.length">
-          <td colspan="5" class="dogam-empty">표시할 항목이 없습니다.</td>
+          <td colspan="5" class="dogam-empty">Không có vật phẩm để hiển thị.</td>
         </tr>
         </tbody>
       </table>
 
       <ol class="dogam-guide">
-        <h3>⭐ 사용 가이드</h3>
-        <li>체크한 내용은 브라우저에 저장되어 다시 방문해도 그대로 남습니다.</li>
-        <li>반짝A, 반짝B, 촌장의 비밀상자에서 체크하면 <b>도감세트에도 자동으로 반영</b>됩니다. 반대로 도감세트에서 체크해도 상자 쪽에 반영됩니다.</li>
-        <li><b>상자 우선순위</b>의 남은 확률이 가장 높은 상자를 여는 것이 새 아이템을 얻기에 가장 유리합니다.</li>
-        <li>촌장의 비밀상자는 코스튬류만 도감에 등록되므로, 재화 같은 비수집 항목은 계산에서 빠집니다.</li>
-        <li>도감세트에서 앞뜰, 보석, 어금니처럼 상자가 아닌 출처의 항목은 직접 체크하시면 됩니다.</li>
-        <li>처음 쓰실 때는 <b>전체 체크</b>로 채운 뒤 아직 없는 것만 해제하시는 편이 빠릅니다.</li>
+        <h3>⭐ Hướng dẫn sử dụng</h3>
+        <li>Lựa chọn của bạn được lưu trong trình duyệt và vẫn còn khi quay lại trang.</li>
+        <li>Vật phẩm đánh dấu trong Hộp ngoại trang lấp lánh A/B hoặc Rương bí mật Thị trưởng sẽ tự đồng bộ với Bộ sưu tập và ngược lại.</li>
+        <li>Nên mở rương có <b>tỉ lệ vật phẩm còn thiếu</b> cao nhất để tăng cơ hội nhận vật phẩm mới.</li>
+        <li>Rương bí mật Thị trưởng chỉ ghi nhận ngoại trang vào Bộ sưu tập; tiền tệ và vật phẩm không thể sưu tầm không được tính.</li>
+        <li>Vật phẩm nhận từ Sân trước Thành ma vương, đá quý hoặc răng hàm cần được đánh dấu thủ công.</li>
+        <li>Khi dùng lần đầu, cách nhanh nhất là chọn tất cả rồi bỏ chọn những vật phẩm bạn chưa có.</li>
       </ol>
     </div>
   </div>
@@ -599,8 +600,8 @@
   <!-- Riding Pet Equipment -->
   <div v-show="activeTab === 'pet'">
     <div class="pet-container">
-      <h3>라이딩펫 장비 설명서</h3>
-      <p class="rune-note">적용 스킬 설명과 적용 직업을 한 칸에 합쳐서 보여줍니다.</p>
+      <h3>Hướng dẫn trang bị thú cưỡi</h3>
+      <p class="rune-note">Mô tả kỹ năng áp dụng và nghề áp dụng được hiển thị chung trong một ô.</p>
 
       <div v-for="set in petEquipSets" :key="set.name" class="pet-set">
         <div class="pet-set-head" :style="petColor(set, 78)">{{ set.name }}</div>
@@ -621,10 +622,10 @@
       </div>
 
       <ol class="pet-guide">
-        <h3>⭐ 참고</h3>
-        <li>세트당 <b>편자 · 안장 · 고삐</b> 세 부위로 구성됩니다.</li>
-        <li>적용 대상이 정해진 옵션만 아래에 설명과 직업이 함께 표시됩니다.</li>
-        <li>파란 칩은 <b>직업 · 해당 스킬</b>을 뜻합니다.</li>
+        <h3>⭐ Ghi Chú</h3>
+        <li>Mỗi bộ gồm ba phần: <b>Móng sắt · Yên ngựa · Dây cương</b>.</li>
+        <li>Chỉ những tùy chọn có đối tượng áp dụng cụ thể mới hiển thị mô tả và nghề bên dưới.</li>
+        <li>Nhãn màu xanh biểu thị <b>Nghề · Kỹ năng tương ứng</b>.</li>
       </ol>
     </div>
   </div>
@@ -633,49 +634,49 @@
   <div v-show="activeTab === 'formation'">
     <div class="formation-container">
       <div class="formation-form">
-        <input v-model.trim="newUnit.name" type="text" maxlength="12" placeholder="캐릭터 이름" @keyup.enter="addUnit">
-        <input v-model.trim="newUnit.job" type="text" list="formation-job-list" placeholder="직업" @keyup.enter="addUnit">
+        <input v-model.trim="newUnit.name" type="text" maxlength="12" placeholder="Tên nhân vật" @keyup.enter="addUnit">
+        <input v-model.trim="newUnit.job" type="text" list="formation-job-list" placeholder="Nghề" @keyup.enter="addUnit">
         <datalist id="formation-job-list">
           <option v-for="job in jobOptions" :key="job" :value="job"></option>
         </datalist>
         <select v-model="newUnit.side">
-          <option value="mine">우리</option>
-          <option value="enemy">상대</option>
+          <option value="mine">Phe Ta</option>
+          <option value="enemy">Đối Thủ</option>
         </select>
-        <button @click="addUnit">추가</button>
+        <button @click="addUnit">Thêm</button>
         <label class="formation-reset-job">
-          <input type="checkbox" v-model="resetJobOnAdd"> 추가 후 직업 초기화
+          <input type="checkbox" v-model="resetJobOnAdd"> Đặt lại nghề sau khi thêm
         </label>
       </div>
       <p v-if="formationMessage" class="formation-message">{{ formationMessage }}</p>
 
       <div v-for="side in boardOrder" :key="side" class="formation-side">
         <div class="formation-side-head">
-          <span class="formation-side-name" :class="side">{{ side === 'mine' ? '우리 진형' : '상대 진형' }}</span>
+          <span class="formation-side-name" :class="side">{{ side === 'mine' ? 'Phe Ta Đội Hình' : 'Đối Thủ Đội Hình' }}</span>
           <span class="formation-count">{{ unitCount(side) }} / {{ maxUnits }}</span>
-          <button class="formation-share" @click="exportSide(side)">추출</button>
-          <button class="formation-share" @click="openLoad(side)">로드</button>
-          <button class="formation-clear" @click="clearSide(side)">비우기</button>
+          <button class="formation-share" @click="exportSide(side)">Xuất mã</button>
+          <button class="formation-share" @click="openLoad(side)">Tải mã</button>
+          <button class="formation-clear" @click="clearSide(side)">Xóa đội hình</button>
         </div>
         <div v-if="shareBox.side === side" class="formation-share-box">
           <textarea v-model="shareBox.text" class="formation-share-text" rows="2"
-                    :placeholder="shareBox.mode === 'export' ? '' : '받은 배치 코드를 붙여넣으세요'"
+                    :placeholder="shareBox.mode === 'export' ? '' : 'Dán mã đội hình đã nhận'"
                     @focus="$event.target.select()"></textarea>
           <div class="formation-share-actions">
-            <button v-if="shareBox.mode === 'export'" @click="copyShare">복사</button>
-            <button v-else @click="loadSide(side)">불러오기</button>
-            <button @click="shareBox.side = null">닫기</button>
+            <button v-if="shareBox.mode === 'export'" @click="copyShare">Sao chép</button>
+            <button v-else @click="loadSide(side)">Tải</button>
+            <button @click="shareBox.side = null">Đóng</button>
           </div>
           <p v-if="shareBox.message" class="formation-share-msg">{{ shareBox.message }}</p>
         </div>
         <div class="formation-presets">
-          <div class="formation-preset-title">프리셋</div>
+          <div class="formation-preset-title">Mẫu Lưu</div>
           <div v-for="(preset, i) in formationPresets[side]" :key="i" class="formation-preset-row"
                :class="{ filled: !!preset.code }">
             <input v-model="preset.name" class="formation-preset-name" maxlength="16"
-                   :placeholder="'프리셋 ' + (i + 1)" @change="savePresets">
-            <button class="formation-preset-save" @click="savePreset(side, i)">저장</button>
-            <button class="formation-preset-load" :disabled="!preset.code" @click="applyPreset(side, i)">불러오기</button>
+                   :placeholder="'Mẫu Lưu ' + (i + 1)" @change="savePresets">
+            <button class="formation-preset-save" @click="savePreset(side, i)">Lưu</button>
+            <button class="formation-preset-load" :disabled="!preset.code" @click="applyPreset(side, i)">Tải</button>
           </div>
           <p v-if="presetMessage.side === side" class="formation-share-msg">{{ presetMessage.text }}</p>
         </div>
@@ -700,18 +701,18 @@
       </div>
 
       <ol class="formation-guide">
-        <h3>⭐ 사용 가이드</h3>
-        <li>이름과 직업을 입력하고 <b>우리 / 상대</b>를 고른 뒤 추가하면 빈 칸부터 채워집니다.</li>
-        <li>이름을 비워두면 <b>아군1, 아군2</b> 또는 <b>적1, 적2</b> 순으로 자동으로 붙습니다.</li>
-        <li>한 진영에 배치할 수 있는 인원은 <b>최대 {{ maxUnits }}명</b>입니다. 칸은 16개지만 10명까지만 들어갑니다.</li>
-        <li><b>추가 후 직업 초기화</b>를 끄면 같은 직업을 연달아 추가할 때 직업이 그대로 남습니다.</li>
-        <li>배치된 캐릭터를 <b>끌어서</b> 다른 칸으로 옮길 수 있습니다. 마우스와 터치 모두 됩니다.</li>
-        <li>이미 다른 캐릭터가 있는 칸에 놓으면 <b>서로 자리를 바꿉니다.</b></li>
-        <li>우리 진형과 상대 진형 사이로도 끌어서 옮길 수 있습니다.</li>
-        <li>칸 번호는 게임과 동일합니다. 양쪽 <b>1번이 서로 맞닿는</b> 최전방입니다.</li>
-        <li>배치한 내용은 브라우저에 저장되어 다시 방문해도 남습니다.</li>
-        <li><b>추출</b>로 진영 배치를 코드로 뽑아 남에게 주고, <b>로드</b>로 받은 코드를 붙여넣어 그대로 재현할 수 있습니다. 우리 / 상대 진형은 각각 따로 다룹니다.</li>
-        <li><b>프리셋</b> 5칸에 자주 쓰는 배치를 저장해두고 불러올 수 있습니다. <b>저장</b>은 현재 배치를 그 칸에 담고, 이름은 직접 입력합니다. 프리셋도 브라우저에 저장됩니다.</li>
+        <h3>⭐ Hướng dẫn sử dụng</h3>
+        <li>Nhập tên và nghề, chọn <b>Phe Ta / Đối Thủ</b>, rồi thêm nhân vật; hệ thống sẽ điền vào ô trống đầu tiên.</li>
+        <li>Nếu bỏ trống tên, hệ thống tự đặt lần lượt là <b>Đồng Minh 1, Đồng Minh 2</b> hoặc <b>Kẻ Địch 1, Kẻ Địch 2</b>.</li>
+        <li>Mỗi phe bố trí được <b>tối đa {{ maxUnits }} người</b>. Bàn có 16 ô nhưng chỉ xếp được 10 người.</li>
+        <li>Nếu tắt <b>Đặt lại nghề sau khi thêm</b>, nghề đã chọn sẽ được giữ lại khi thêm nhiều nhân vật liên tiếp.</li>
+        <li>Có thể <b>kéo</b> nhân vật sang ô khác bằng chuột hoặc thao tác cảm ứng.</li>
+        <li>Nếu thả vào ô đã có nhân vật, hai nhân vật sẽ <b>đổi vị trí</b>.</li>
+        <li>Có thể kéo nhân vật qua lại giữa đội hình Phe Ta và Đối Thủ.</li>
+        <li>Số ô giống trong game; <b>ô số 1 của hai bên đối diện nhau</b> ở hàng đầu.</li>
+        <li>Đội hình được lưu trong trình duyệt và vẫn còn khi bạn quay lại.</li>
+        <li>Dùng <b>Xuất mã</b> để chia sẻ đội hình; dán mã đã nhận rồi chọn <b>Tải</b> để khôi phục. Đội hình Phe Ta và Đối Thủ được xử lý riêng.</li>
+        <li>Bạn có 5 <b>mẫu lưu</b> cho đội hình thường dùng. Nút <b>Lưu</b> ghi đội hình hiện tại vào ô đã chọn; tên mẫu do bạn nhập. Các mẫu cũng được lưu trong trình duyệt.</li>
       </ol>
     </div>
   </div>
@@ -719,26 +720,26 @@
   <!-- Challengers League -->
   <div v-show="activeTab === 'league'">
     <div class="league-container">
-      <h3>티어별 명예점수 보상표</h3>
+      <h3>Bảng phần thưởng điểm danh dự theo bậc</h3>
 
       <div class="league-finder">
-        <span class="league-finder-label">내 레이팅</span>
-        <input type="number" min="0" v-model.number="myRating" placeholder="예) 2450">
+        <span class="league-finder-label">Điểm xếp hạng của tôi</span>
+        <input type="number" min="0" v-model.number="myRating" placeholder="Ví dụ: 2450">
         <div v-if="myTier" class="league-result">
           <span class="league-result-tier" :style="{ backgroundColor: leagueColor(myTier.group) }">{{ myTier.tier }}</span>
-          <span class="league-result-honor">명예 점수 {{ myTier.honor }}</span>
+          <span class="league-result-honor">Điểm danh dự {{ myTier.honor }}</span>
         </div>
         <div v-else class="league-result league-result-empty">
-          {{ myRating ? '브론즈4 미만이라 보상 구간에 들지 않습니다.' : '레이팅을 입력하면 해당 티어를 짚어줍니다.' }}
+          {{ myRating ? 'Dưới Đồng IV nên chưa đủ điều kiện nhận thưởng.' : 'Nhập điểm xếp hạng để xác định bậc hiện tại.' }}
         </div>
       </div>
 
       <table class="league-table">
         <thead>
         <tr>
-          <th>티어</th>
-          <th>레이팅(이상)</th>
-          <th>명예 점수</th>
+          <th>Bậc</th>
+          <th>Điểm xếp hạng (tối thiểu)</th>
+          <th>Điểm danh dự</th>
         </tr>
         </thead>
         <tbody>
@@ -760,12 +761,12 @@
           <col class="reward-col-gem">
         </colgroup>
         <thead>
-        <tr><th colspan="4" class="reward-title ranking">랭킹 보상</th></tr>
+        <tr><th colspan="4" class="reward-title ranking">Xếp hạng Phần thưởng</th></tr>
         <tr>
-          <th class="reward-head ranking">보상명칭</th>
-          <th class="reward-head ranking">보상 조건 랭킹 순위</th>
-          <th class="reward-head ranking">아레나 토큰 개수</th>
-          <th class="reward-head ranking">보석 개수</th>
+          <th class="reward-head ranking">Tên phần thưởng</th>
+          <th class="reward-head ranking">Điều kiện thứ hạng</th>
+          <th class="reward-head ranking">Số token Đấu Trường</th>
+          <th class="reward-head ranking">Đá quý Số lượng</th>
         </tr>
         </thead>
         <tbody>
@@ -786,12 +787,12 @@
           <col class="reward-col-gem">
         </colgroup>
         <thead>
-        <tr><th colspan="4" class="reward-title joining">참여 보상</th></tr>
+        <tr><th colspan="4" class="reward-title joining">Tham Gia Phần thưởng</th></tr>
         <tr>
-          <th class="reward-head joining">보상명칭</th>
-          <th class="reward-head joining">보상 조건 참여횟수</th>
-          <th class="reward-head joining">아레나 토큰 개수</th>
-          <th class="reward-head joining">보석 개수</th>
+          <th class="reward-head joining">Tên phần thưởng</th>
+          <th class="reward-head joining">Điều kiện số lần tham gia</th>
+          <th class="reward-head joining">Số token Đấu Trường</th>
+          <th class="reward-head joining">Đá quý Số lượng</th>
         </tr>
         </thead>
         <tbody>
@@ -815,13 +816,13 @@
                 @click="equipGradeTier = g.id">{{ g.id }}</button>
       </div>
 
-      <h3>{{ currentEquipGrade.label }} 장비 옵션 등급표</h3>
+      <h3>{{ currentEquipGrade.label }} Bảng hạng tùy chọn trang bị</h3>
 
       <div class="rune-scroll">
         <table class="equip-grade-table">
           <thead>
           <tr>
-            <th class="equip-opt-head">장비 공통 옵션</th>
+            <th class="equip-opt-head">Tùy chọn chung của trang bị</th>
             <th v-for="h in equipTierHeaders" :key="h" :style="equipGradeHeadStyle(h)">{{ h }}</th>
           </tr>
           </thead>
@@ -838,7 +839,7 @@
         <table class="equip-grade-table">
           <thead>
           <tr>
-            <th class="equip-opt-head weapon">무기 전용 옵션</th>
+            <th class="equip-opt-head weapon">Tùy chọn dành riêng cho vũ khí</th>
             <th v-for="h in equipTierHeaders" :key="h" :style="equipGradeHeadStyle(h)">{{ h }}</th>
           </tr>
           </thead>
@@ -852,9 +853,9 @@
       </div>
 
       <ol class="rune-guide">
-        <h3>⭐ 참고</h3>
-        <li>수치는 각 등급(MAX ~ C)에서 나올 수 있는 <b>옵션 최대치</b>입니다.</li>
-        <li>같은 행에 묶인 옵션들은 등급별 수치가 동일합니다.</li>
+        <h3>⭐ Ghi Chú</h3>
+        <li>Các giá trị là <b>mức tùy chọn tối đa</b> có thể xuất hiện ở từng phẩm chất (MAX–C).</li>
+        <li>Các tùy chọn trong cùng một hàng có giá trị giống nhau ở từng phẩm chất.</li>
       </ol>
     </div>
   </div>
@@ -862,15 +863,15 @@
   <!-- Relic -->
   <div v-show="activeTab === 'relic'">
     <div class="relic-container">
-      <h3>유물 버프 효과</h3>
-      <p class="rune-note">모든 유물의 수집 확률은 1/30 입니다. 버프 수치는 유물 레벨 1 ~ 10 순서입니다.</p>
+      <h3>Di vật Buff Hiệu ứng</h3>
+      <p class="rune-note">Tỉ lệ thu thập của mọi Di vật là 1/30. Chỉ số buff được liệt kê theo cấp Di vật 1–10.</p>
       <div class="rune-scroll">
         <table class="relic-table">
           <thead>
           <tr>
-            <th>유물 명칭</th>
-            <th>버프 효과 (Lv.1 ~ Lv.10)</th>
-            <th>확률</th>
+            <th>Tên Di vật</th>
+            <th>Buff Hiệu ứng (Lv.1 ~ Lv.10)</th>
+            <th>Tỉ lệ</th>
           </tr>
           </thead>
           <tbody>
@@ -883,8 +884,8 @@
         </table>
       </div>
 
-      <h3>유물 레벨업 필요 개수</h3>
-      <p class="rune-note">각 유물은 1개 획득 시 활성화되며, 이후 레벨업에 필요한 유물 개수입니다.</p>
+      <h3>Số lượng cần để nâng cấp Di vật</h3>
+      <p class="rune-note">Mỗi Di vật được kích hoạt khi nhận món đầu tiên; bảng thể hiện số lượng cần cho các lần nâng cấp sau.</p>
       <div class="rune-scroll">
         <table class="relic-levelup-table">
           <thead>
@@ -894,16 +895,16 @@
           </thead>
           <tbody>
           <tr>
-            <td v-for="l in relicLevelUp" :key="l.step">{{ l.count }}개</td>
+            <td v-for="l in relicLevelUp" :key="l.step">{{ l.count }} món</td>
           </tr>
           </tbody>
         </table>
       </div>
 
       <ol class="rune-guide">
-        <h3>⭐ 참고</h3>
-        <li>최대 레벨(Lv.10)에 필요한 수량을 초과해 모은 유물은 <b>유물 초과분 교환</b>으로 1개당 유물 토큰 5개로 바꿀 수 있습니다.</li>
-        <li>v1.376부터 적용된 정보입니다.</li>
+        <h3>⭐ Ghi Chú</h3>
+        <li>Di vật dư sau khi đạt cấp tối đa (Lv.10) có thể đổi trong mục <b>Đổi Di vật dư</b>, mỗi món nhận 5 token Di vật.</li>
+        <li>Thông tin này được áp dụng từ phiên bản 1.376.</li>
       </ol>
     </div>
   </div>
@@ -917,8 +918,8 @@
       </div>
 
       <p class="rune-note">
-        {{ uniqueMode }} 모드에서 드랍됩니다. 표시된 단계부터 등장하며, 더 높은 단계에서도 계속 드랍됩니다.
-        일반몬스터 &lt; 보스 &lt; 필드보스 순으로 드랍률이 올라갑니다.
+        Rơi trong chế độ {{ uniqueMode }} từ cấp được ghi và tiếp tục rơi ở các cấp cao hơn.
+        Tỉ lệ rơi tăng theo thứ tự: quái thường &lt; Boss &lt; Boss Thế Giới.
       </p>
 
       <div v-for="stage in stagesOf(uniqueMode)" :key="stage" class="unique-stage-group">
@@ -927,40 +928,40 @@
           <table class="unique-table">
             <thead>
             <tr>
-              <th>장비명</th>
-              <th>부위</th>
-              <th>고유옵션</th>
+              <th>Tên trang bị</th>
+              <th>Phân loại</th>
+              <th>Tùy chọn riêng</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="u in uniquesOf(uniqueMode, stage)" :key="u.name">
               <td class="unique-name">{{ u.name }}</td>
               <td>{{ u.part }}</td>
-              <td class="unique-option">{{ u.option || '옵션 정보 미확보' }}</td>
+              <td class="unique-option">{{ u.option || 'Chưa có thông tin tùy chọn' }}</td>
             </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <h3>유니크 공통 정보</h3>
+      <h3>Thông tin chung về trang bị Độc nhất</h3>
       <ol class="rune-guide">
-        <li>유니크 장비는 <b>총 5개 옵션</b>을 가지며, 고유옵션을 제외한 나머지는 랜덤옵션으로 붙습니다.</li>
-        <li>고유옵션은 <b>천사의 축복</b> 또는 <b>대천사의 축복</b>으로 개조할 수 있습니다. 천사의 축복은 성공 확률 25%로 승전 1,000포인트로 구매하고, 대천사의 축복은 유료(과금) 상품입니다.</li>
-        <li>일부 유니크(질풍의 경갑, 저거너트 헬름, 진 질풍의 경갑)는 고유옵션 외에 <b>첫 줄에 고정 옵션</b>이 하나 더 붙습니다.</li>
-        <li>모든 유니크 장비에는 무기 전용 랜덤옵션이 붙지 않습니다.</li>
-        <li>어비스 부스트의 유니크는 카오스 부스트보다 아이템 레벨·능력치·옵션 범위가 한 단계 높습니다.</li>
+        <li>Trang bị Độc nhất có <b>tổng cộng 5 tùy chọn</b>. Ngoài tùy chọn riêng, các dòng còn lại là tùy chọn ngẫu nhiên.</li>
+        <li>Có thể thay đổi tùy chọn riêng bằng <b>Phước Lành Thiên Thần</b> hoặc <b>Phước Lành Đại Thiên Thần</b>. Phước Lành Thiên Thần có tỉ lệ thành công 25% và mua bằng 1.000 điểm Chiến Thắng; Phước Lành Đại Thiên Thần là vật phẩm trả phí.</li>
+        <li>Một số trang bị Độc nhất (Giáp Nhẹ Cuồng Phong, Mũ Juggernaut và Chân Giáp Nhẹ Cuồng Phong) có thêm một <b>tùy chọn cố định ở dòng đầu</b>, ngoài tùy chọn riêng.</li>
+        <li>Trang bị Độc nhất không nhận các tùy chọn ngẫu nhiên dành riêng cho vũ khí.</li>
+        <li>Trang bị Độc nhất ở Boost Vực Thẳm cao hơn Boost Hỗn Mang một bậc về cấp vật phẩm, chỉ số và phạm vi tùy chọn.</li>
       </ol>
 
-      <h3>난이도 추가 시점</h3>
+      <h3>Thời điểm bổ sung độ khó</h3>
       <div class="rune-scroll">
         <table class="unique-timeline-table">
           <thead>
           <tr>
-            <th>난이도</th>
-            <th>버전</th>
-            <th>추가 시점</th>
-            <th>비고</th>
+            <th>Độ khó</th>
+            <th>Phiên bản</th>
+            <th>Ngày bổ sung</th>
+            <th>Ghi chú</th>
           </tr>
           </thead>
           <tbody>
@@ -973,7 +974,7 @@
           </tbody>
         </table>
       </div>
-      <p class="rune-note">v1.331, v1.367은 사전안내 글 기준 날짜로, 실제 출시는 이후 수일 내입니다.</p>
+      <p class="rune-note">Ngày của v1.331 và v1.367 lấy theo thông báo trước; bản cập nhật thực tế được phát hành trong vài ngày sau đó.</p>
     </div>
   </div>
 
@@ -990,21 +991,18 @@ import { equipGrades, equipTierHeaders, equipGradeColors } from './equipGradeDat
 import { relics, relicLevelUp } from './relicData';
 import { uniques, uniqueModes, uniqueTimeline } from './uniqueData';
 
-const BOX_SOURCES = ['반짝A', '반짝B', '촌비'];
+const BOX_SOURCES = ['Lấp LánhA', 'Lấp LánhB', 'Rương Bí Mật'];
 
-// 진형 판은 4x4 격자를 45도 돌린 다이아몬드다.
 const TILE_W = 84;
 const TILE_H = 60;
-// 칸은 16개지만 한 진영에 배치할 수 있는 인원은 10명이다.
 const MAX_UNITS = 10;
-// 게임 화면에서 확인한 직업별 색
 const JOB_COLORS = {
-  '오포지터': '#5fd0e8',
-  '스타슈터': '#7ee07e',
-  '배틀커맨더': '#ff8fd0',
-  '데스브링어': '#b98cff',
-  '하이프리스트': '#ffe9a8',
-  '마나로드': '#66d9c8',
+  'Oppositor': '#5fd0e8',
+  'Star Shooter': '#7ee07e',
+  'Battle Commander': '#ff8fd0',
+  'Death Bringer': '#b98cff',
+  'Đại Tư Tế': '#ffe9a8',
+  'Mana Lord': '#66d9c8',
 };
 
 export default {
@@ -1014,22 +1012,21 @@ export default {
               // Common
               activeTab: 'attack', // Set 'attack' as the default active tab
               isOpened: false,
-              // 탭마다 제작자 표기가 다르다
               tabCredits: {
                 attack: [
-                  { role: '제작', name: 'Andante An가자미' },
-                  { role: '수정', name: 'Bell 꼬벨' },
+                  { role: 'Phát triển', name: 'HwiHuang' },
+                  { role: 'Phát triển', name: 'HwiHuang' },
                 ],
-                move: [{ role: '제작', name: 'Bell 꼬벨' }],
-                kills: [{ role: '제작', name: 'Bell 꼬벨' }],
-                rune: [{ role: '제작', name: 'Stella 꼬뱀별' }],
-                dogam: [{ role: '제작', name: 'Stella 꼬뱀별' }],
-                pet: [{ role: '제작', name: 'Stella 꼬뱀별' }],
-                formation: [{ role: '제작', name: 'Stella 꼬뱀별' }],
-                league: [{ role: '제작', name: 'Stella 꼬뱀별' }],
-                equipGrade: [{ role: '제작', name: 'Stella 꼬뱀별' }],
-                relic: [{ role: '제작', name: 'Stella 꼬뱀별' }],
-                unique: [{ role: '제작', name: 'Stella 꼬뱀별' }],
+                move: [{ role: 'Phát triển', name: 'HwiHuang' }],
+                kills: [{ role: 'Phát triển', name: 'HwiHuang' }],
+                rune: [{ role: 'Việt hóa', name: 'HwiHuang' }],
+                dogam: [{ role: 'Việt hóa', name: 'HwiHuang' }],
+                pet: [{ role: 'Việt hóa', name: 'HwiHuang' }],
+                formation: [{ role: 'Việt hóa', name: 'HwiHuang' }],
+                league: [{ role: 'Việt hóa', name: 'HwiHuang' }],
+                equipGrade: [{ role: 'Việt hóa', name: 'HwiHuang' }],
+                relic: [{ role: 'Việt hóa', name: 'HwiHuang' }],
+                unique: [{ role: 'Việt hóa', name: 'HwiHuang' }],
               },
         // Attack Speed Calculator
         job: '',
@@ -1043,7 +1040,7 @@ export default {
         equip_speed: '',
         final_speed: '',
         pet_equipment: '',
-        items: ['직업', '무기', '공속스탯', '성격', '비법', '연합공속', '펫장비', '퀴큰', '퓨리'],
+        items: ['Nghề', 'Vũ khí', 'Chỉ số tốc đánh', 'Tính cách', 'Bí pháp', 'Tốc đánh Liên Minh', 'Trang bị thú cưng', 'Quicken', 'Fury'],
   
         // Movement Speed Calculator
         moveBuffs: {
@@ -1076,11 +1073,9 @@ export default {
         currentFloor: null,
         runeRows: [
           {
-            name: '스탯 룬',
+            name: 'Rune chỉ số',
             hue: 210,
             maxStage: 15,
-            // 1~100층은 10층마다 1단계씩(91~100 = 10단계), 101~200층은 10단계 유지,
-            // 201층부터 20층마다 1단계씩 올라 281~300층에서 15단계
             bands: [
               { stage: 1, from: 1, to: 10 },
               { stage: 2, from: 11, to: 20 },
@@ -1100,7 +1095,7 @@ export default {
             ],
           },
           {
-            name: '1차 스킬룬',
+            name: 'Rune kỹ năng bậc 1',
             hue: 145,
             maxStage: 3,
             bands: [
@@ -1110,7 +1105,7 @@ export default {
             ],
           },
           {
-            name: '2차 스킬룬',
+            name: 'Rune kỹ năng bậc 2',
             hue: 25,
             maxStage: 8,
             bands: [
@@ -1125,7 +1120,7 @@ export default {
             ],
           },
           {
-            name: '3차 스킬룬',
+            name: 'Rune kỹ năng bậc 3',
             hue: 285,
             maxStage: 8,
             bands: [
@@ -1143,39 +1138,39 @@ export default {
         runeOptionGroups: [
           {
             label: 'A',
-            title: '공격속도 · 회피 · 치명타 확률',
-            options: ['공격속도 %', '회피력 %', '치명타 확률 %'],
+            title: 'Tốc đánh · Né tránh · Tỉ lệ chí mạng',
+            options: ['Tốc đánh %', 'Né tránh %', 'Tỉ lệ chí mạng %'],
             values: [1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9, 10, 11],
           },
           {
             label: 'B',
-            title: '이동속도 · 흡혈 · 회복류',
-            options: ['이동속도 %', '데미지 흡혈 %', '받는 데미지 25% 감소 확률 %', '공격시 피해의 추가 데미지 %', '공격시 3% 기분 회복 확률 %', '공격시 1% 기력 회복 확률 %', '공격시 3% 허기 회복 확률 %'],
+            title: 'Tốc chạy · Hút máu · Hồi phục',
+            options: ['Tốc chạy %', 'Sát thương Hút máu %', 'Nhận Sát thương 25% Giảm Tỉ lệ %', 'Sát thương cộng thêm khi tấn công %', 'Khi Tấn Công 3% Tâm trạng Hồi phục Tỉ lệ %', 'Khi Tấn Công 1% Thể lực Hồi phục Tỉ lệ %', 'Khi Tấn Công 3% Đói Hồi phục Tỉ lệ %'],
             values: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
           },
           {
             label: 'C',
-            title: '소모량 · 경험치',
-            options: ['기분 소모량 %', '기력 소모량 %', '허기 소모량 %', '획득 경험치 %'],
+            title: 'Lượng tiêu hao · Kinh nghiệm',
+            options: ['Tâm trạng Lượng tiêu hao %', 'Thể lực Lượng tiêu hao %', 'Đói Lượng tiêu hao %', 'Nhận Kinh nghiệm %'],
             values: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32],
           },
           {
             label: 'D',
-            title: '공격력 · 방어력 · 체력 · 획득류',
-            options: ['전체 공격력 %', '전체 방어력 %', '체력 %', '2배 골드획득 확률 %', '재료 추가 획득 확률 %'],
+            title: 'Công · Thủ · HP · Thu thập',
+            options: ['Tất cả Công %', 'Tất cả Thủ %', 'HP %', 'Tỉ lệ nhận gấp đôi Vàng %', 'Nguyên Liệu Thêm Nhận Tỉ lệ %'],
             values: [6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34],
           },
           {
             label: 'E',
-            title: '종족 데미지 · 치명타 피해량',
-            options: ['영장류 데미지 %', '악마류 데미지 %', '언데드류 데미지 %', '보스류 데미지 %', '동물류 데미지 %', '치명타 피해량 %'],
+            title: 'Sát thương chủng tộc · Sát thương chí mạng',
+            options: ['Sát thương Quái nhân %', 'Sát thương Quỷ %', 'Sát thương Xác sống %', 'Sát thương Boss %', 'Sát thương Thú %', 'Sát thương chí mạng %'],
             values: [10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38],
           },
         ],
         skillRuneList: [
-          { tier: '1차 스킬룬', runes: ['퓨리', '홀리라이트', '멀티샷', '썬더볼트'] },
-          { tier: '2차 스킬룬', runes: ['듀얼웨폰', '데스코일', '필버라이즈', '블레싱', '실버웨폰', '다크웨폰', '레인폴', '스나이핑', '서몬피닉스', '블리자드', '스톤커즈', '메테오'] },
-          { tier: '3차 스킬룬', runes: ['배틀샤우트', '오라블레이드', '싸이클론', '디펜스오라', '핸즈오브갓', '익스큐션', '송오브피스', '포이즌봄', '미스틱애로우', '서몬퍼밀리어', '폴리모프', '나이트메어'] },
+          { tier: 'Rune kỹ năng bậc 1', runes: ['Fury', 'Holy Light', 'Multi Shot', 'Thunderbolt'] },
+          { tier: 'Rune kỹ năng bậc 2', runes: ['Dual Weapon', 'Death Coil', 'Pulverize', 'Blessing', 'Silver Weapon', 'Dark Weapon', 'Rainfall', 'Sniping', 'Summon Phoenix', 'Blizzard', 'Stone Curse', 'Meteor'] },
+          { tier: 'Rune kỹ năng bậc 3', runes: ['Battle Shout', 'Aura Blade', 'Lốc Xoáy', 'Defense Aura', 'Hands of God', 'Execution', 'Song of Peace', 'Poison Bomb', 'Mystic Arrow', 'Summon Familiar', 'Polymorph', 'Nightmare'] },
         ],
 
         // Collection / Box Probability
@@ -1184,10 +1179,10 @@ export default {
         dogamHideOwned: false,
         dogamLocalStorageKey: 'dogamOwnedItems',
         dogamSectionList: [
-          { id: 'sets', label: '도감세트' },
-          { id: '반짝A', label: '반짝A' },
-          { id: '반짝B', label: '반짝B' },
-          { id: '촌비', label: '촌장의 비밀상자' },
+          { id: 'sets', label: 'Bộ sưu tập' },
+          { id: 'Lấp LánhA', label: 'Lấp Lánh A' },
+          { id: 'Lấp LánhB', label: 'Lấp Lánh B' },
+          { id: 'Rương Bí Mật', label: 'Rương bí mật Thị trưởng' },
         ],
 
         // Riding Pet Equipment
@@ -1202,7 +1197,7 @@ export default {
         // Equipment Option Grade
         equipGrades,
         equipTierHeaders,
-        equipGradeTier: '태초',
+        equipGradeTier: 'Khởi Nguyên',
 
         // Relic / Unique
         relics,
@@ -1210,7 +1205,7 @@ export default {
         uniques,
         uniqueModes,
         uniqueTimeline,
-        uniqueMode: '카오스 부스트',
+        uniqueMode: 'Hỗn Mang Boost',
 
         // Formation Editor
         formation: { mine: new Array(16).fill(null), enemy: new Array(16).fill(null) },
@@ -1221,7 +1216,6 @@ export default {
         boardOrder: ['enemy', 'mine'],
         formationLocalStorageKey: 'formationLayout',
         shareBox: { side: null, mode: 'export', text: '', message: '' },
-        // 진영별 프리셋 5칸 (이름 + 추출 코드)
         formationPresets: {
           mine: Array.from({ length: 5 }, () => ({ name: '', code: '' })),
           enemy: Array.from({ length: 5 }, () => ({ name: '', code: '' })),
@@ -1231,8 +1225,8 @@ export default {
         resetJobOnAdd: true,
         maxUnits: MAX_UNITS,
         jobOptions: [
-          '배틀커맨더', '소드엠페러', '오포지터', '마나로드', '하이프리스트',
-          '홀리나이트', '스타슈터', '데드아이', '오버로드', '데스브링어',
+          'Battle Commander', 'Sword Emperor', 'Oppositor', 'Mana Lord', 'Đại Tư Tế',
+          'Holy Knight', 'Star Shooter', 'Dead Eye', 'Overlord', 'Death Bringer',
         ],
       };
     },
@@ -1249,12 +1243,11 @@ export default {
         const stage = this.stageAtColumn(row, columnStart);
         return {
           name: row.name,
-          text: stage === null ? '미출현' : stage + '단계',
+          text: stage === null ? 'Chưa xuất hiện' : stage + 'Cấp',
           style: stage === null ? {} : this.bandStyle(row, stage),
         };
       });
     },
-    // 상자별 미보유 종류 수와 확률 합계 — 값이 클수록 새 아이템이 나올 가능성이 높다
     boxStats() {
       return boxes.map(box => {
         const remain = box.items.filter(item => !this.dogamOwned[item.key]);
@@ -1291,7 +1284,7 @@ export default {
       return groups.filter(g => g.items.length > 0);
     },
     visibleBoxItems() {
-      const items = this.dogamSection === '반짝A' ? boxAItems : boxBItems;
+      const items = this.dogamSection === 'Lấp LánhA' ? boxAItems : boxBItems;
       return this.dogamHideOwned ? items.filter(i => !this.dogamOwned[i.key]) : items;
     },
     visibleChonbiItems() {
@@ -1301,7 +1294,6 @@ export default {
     currentCredits() {
       return this.tabCredits[this.activeTab] || [];
     },
-    // 표가 높은 티어부터 정렬되어 있어 조건을 만족하는 첫 행이 곧 내 티어다
     myTier() {
       const rating = Number(this.myRating);
       if (!rating) return null;
@@ -1372,7 +1364,6 @@ export default {
     setBoardRef(side, el) {
       this.boardRefs[side] = el;
     },
-    // 격자 좌표 (r, c) 를 다이아몬드 화면 좌표로 옮긴다
     tilesOf(side) {
       const slots = this.formation[side];
       const tiles = [];
@@ -1381,7 +1372,6 @@ export default {
         const c = i % 4;
         tiles.push({
           i, r, c,
-          // 우리 진형은 앞쪽이 1번, 상대 진형은 뒤쪽이 16번이라 번호가 반대로 매겨진다
           num: side === 'mine' ? i + 1 : 16 - i,
           x: (c - r) * (TILE_W / 2) + TILE_W * 1.5,
           y: (c + r) * (TILE_H / 2),
@@ -1410,11 +1400,10 @@ export default {
       return this.formation[side].filter(Boolean).length;
     },
     sideLabel(side) {
-      return side === 'mine' ? '우리' : '상대';
+      return side === 'mine' ? 'Phe Ta' : 'Đối Thủ';
     },
-    // 이름을 비워두면 아군1, 적1 처럼 자동으로 붙인다. 삭제 후에도 겹치지 않게 빈 번호를 찾는다.
     autoName(side) {
-      const prefix = side === 'mine' ? '아군' : '적';
+      const prefix = side === 'mine' ? 'Đồng Minh' : 'Kẻ Địch';
       const used = new Set(this.formation[side].filter(Boolean).map(u => u.name));
       let n = 1;
       while (used.has(prefix + n)) n += 1;
@@ -1425,19 +1414,19 @@ export default {
       const job = this.newUnit.job;
       const name = this.newUnit.name || this.autoName(side);
       if (!this.newUnit.name && !job) {
-        this.formationMessage = '이름이나 직업 중 하나는 입력해주세요.';
+        this.formationMessage = 'Hãy nhập ít nhất tên hoặc nghề.';
         return;
       }
       if (this.unitCount(side) >= MAX_UNITS) {
-        this.formationMessage = this.sideLabel(side) + ' 진형은 최대 ' + MAX_UNITS + '명까지 배치할 수 있습니다.';
+        this.formationMessage = this.sideLabel(side) + ' chỉ được bố trí tối đa ' + MAX_UNITS + ' người.';
         return;
       }
       const empty = this.formation[side].indexOf(null);
       if (empty === -1) {
-        this.formationMessage = this.sideLabel(side) + ' 진형에 빈 칸이 없습니다.';
+        this.formationMessage = this.sideLabel(side) + ' không còn ô trống.';
         return;
       }
-      this.formation[side][empty] = { name, job: job || '미지정' };
+      this.formation[side][empty] = { name, job: job || 'Chưa xác định' };
       this.newUnit.name = '';
       if (this.resetJobOnAdd) this.newUnit.job = '';
       this.formationMessage = '';
@@ -1451,22 +1440,19 @@ export default {
       this.formation[side] = new Array(16).fill(null);
       this.saveFormation();
     },
-    // 진영 배치를 남에게 줄 수 있는 코드 문자열로 만든다.
-    // 형식: "EHT1:" + (칸번호|이름|직업) 을 세미콜론으로 이은 뒤 UTF-8 base64
     encodeSide(side) {
       const parts = [];
       this.formation[side].forEach((unit, i) => {
         if (unit) parts.push([i, unit.name, unit.job].join('|'));
       });
       const body = parts.join(';');
-      // 한글이 있으므로 UTF-8 바이트로 변환 후 base64
       const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(body)));
       return 'EHT1:' + b64;
     },
     decodeSide(code) {
       const trimmed = (code || '').trim();
       if (trimmed.indexOf('EHT1:') !== 0) {
-        throw new Error('배치 코드 형식이 아닙니다.');
+        throw new Error('Mã đội hình không đúng định dạng.');
       }
       const bin = atob(trimmed.slice(5));
       const bytes = Uint8Array.from(bin, ch => ch.charCodeAt(0));
@@ -1477,7 +1463,7 @@ export default {
           const [idx, name, job] = part.split('|');
           const i = Number(idx);
           if (Number.isInteger(i) && i >= 0 && i < 16 && name) {
-            slots[i] = { name, job: job || '미지정' };
+            slots[i] = { name, job: job || 'Chưa xác định' };
           }
         });
       }
@@ -1491,25 +1477,24 @@ export default {
     },
     copyShare() {
       const text = this.shareBox.text;
-      const done = () => { this.shareBox.message = '복사했습니다.'; };
+      const done = () => { this.shareBox.message = 'Đã sao chép.'; };
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(done).catch(() => {
-          this.shareBox.message = '복사에 실패했습니다. 직접 선택해 복사해주세요.';
+          this.shareBox.message = 'Sao chép thất bại. Hãy chọn và sao chép thủ công.';
         });
       } else {
-        this.shareBox.message = '텍스트를 직접 선택해 복사해주세요.';
+        this.shareBox.message = 'Hãy chọn văn bản và sao chép thủ công.';
       }
     },
-    // 코드 문자열을 진영에 적용한다. 성공하면 null, 실패하면 에러 메시지를 반환한다.
     applyCode(side, code) {
       let slots;
       try {
         slots = this.decodeSide(code);
       } catch (e) {
-        return e.message || '배치 코드를 해석할 수 없습니다.';
+        return e.message || 'Không thể đọc mã đội hình.';
       }
       if (slots.filter(Boolean).length > MAX_UNITS) {
-        return '한 진영은 최대 ' + MAX_UNITS + '명까지만 불러올 수 있습니다.';
+        return 'Mỗi phe chỉ tải được tối đa ' + MAX_UNITS + ' người.';
       }
       this.formation[side] = slots;
       this.saveFormation();
@@ -1523,19 +1508,17 @@ export default {
       }
       this.shareBox.side = null;
     },
-    // 현재 배치를 프리셋 슬롯에 저장한다
     savePreset(side, index) {
       this.formationPresets[side][index].code = this.encodeSide(side);
       this.savePresets();
-      this.setPresetMessage(side, (index + 1) + '번 프리셋에 현재 배치를 저장했습니다.');
+      this.setPresetMessage(side, (index + 1) + ' đã lưu đội hình hiện tại.');
     },
-    // 프리셋 슬롯의 배치를 불러온다
     applyPreset(side, index) {
       const preset = this.formationPresets[side][index];
       if (!preset.code) return;
       const err = this.applyCode(side, preset.code);
-      const label = preset.name || (index + 1) + '번 프리셋';
-      this.setPresetMessage(side, err || label + ' 을(를) 불러왔습니다.');
+      const label = preset.name || (index + 1) + ' - Mẫu lưu';
+      this.setPresetMessage(side, err || label + ' đã được tải.');
     },
     setPresetMessage(side, text) {
       this.presetMessage = { side, text };
@@ -1558,7 +1541,7 @@ export default {
           this.formationPresets[side] = slots;
         });
       } catch (e) {
-        // 저장된 프리셋이 손상된 경우 기본값 유지
+        // Giữ các mẫu mặc định nếu dữ liệu đã lưu bị lỗi.
       }
     },
     isDragging(side, index) {
@@ -1586,7 +1569,6 @@ export default {
       if (target) this.moveUnit(this.drag.side, this.drag.index, target.side, target.index);
       this.drag = null;
     },
-    // 화면 좌표를 격자 좌표로 되돌려 어느 칸에 놓였는지 찾는다
     hitTest(clientX, clientY) {
       for (const side of this.boardOrder) {
         const el = this.boardRefs[side];
@@ -1609,9 +1591,8 @@ export default {
       if (fromSide === toSide && fromIndex === toIndex) return;
       const moving = this.formation[fromSide][fromIndex];
       const displaced = this.formation[toSide][toIndex];
-      // 빈 칸으로 진영을 넘어가면 인원이 늘어나므로 상한을 확인한다
       if (fromSide !== toSide && !displaced && this.unitCount(toSide) >= MAX_UNITS) {
-        this.formationMessage = this.sideLabel(toSide) + ' 진형은 최대 ' + MAX_UNITS + '명까지 배치할 수 있습니다.';
+        this.formationMessage = this.sideLabel(toSide) + ' chỉ được bố trí tối đa ' + MAX_UNITS + ' người.';
         return;
       }
       this.formationMessage = '';
@@ -1631,7 +1612,7 @@ export default {
           const slots = new Array(16).fill(null);
           if (parsed && Array.isArray(parsed[side])) {
             parsed[side].slice(0, 16).forEach((unit, i) => {
-              if (unit && unit.name) slots[i] = { name: unit.name, job: unit.job || '미지정' };
+              if (unit && unit.name) slots[i] = { name: unit.name, job: unit.job || 'Chưa xác định' };
             });
           }
           this.formation[side] = slots;
@@ -1661,15 +1642,14 @@ export default {
       }
       this.saveDogamOwned();
     },
-    // 현재 보고 있는 섹션의 항목 전체를 한 번에 체크/해제한다
     setSectionOwned(value) {
       let keys;
       if (this.dogamSection === 'sets') {
         keys = dogamSets.map(i => i.key);
-      } else if (this.dogamSection === '촌비') {
+      } else if (this.dogamSection === 'Rương Bí Mật') {
         keys = chonbiItems.filter(i => i.key).map(i => i.key);
       } else {
-        keys = (this.dogamSection === '반짝A' ? boxAItems : boxBItems).map(i => i.key);
+        keys = (this.dogamSection === 'Lấp LánhA' ? boxAItems : boxBItems).map(i => i.key);
       }
       keys.forEach(key => {
         if (value) {
@@ -1701,12 +1681,10 @@ export default {
         return { from, to: from + 9 };
       });
     },
-    // 층 구간 경계가 모두 10 단위라 컬럼 시작 층만으로 단계를 판별할 수 있다
     stageAtColumn(row, columnStart) {
       const band = row.bands.find(b => columnStart >= b.from && columnStart + 9 <= b.to);
       return band ? band.stage : null;
     },
-    // 같은 단계가 이어지는 컬럼들을 하나의 셀로 병합한다
     blockCells(row, block) {
       const cells = [];
       for (let i = 0; i < 10; i++) {
@@ -1843,7 +1821,6 @@ export default {
         if (rate === 0) return 'N/A';
         return Math.ceil(maxAmp / (rate / 100));
     },
-    // 현재 이속 총합으로 해당 증폭률에서 실제로 받는 증폭값 (상한 적용)
     currentAmp(maxAmp, rate) {
         const amp = Math.min(this.totalMoveSpeed * (rate / 100), maxAmp);
         return Math.round(amp * 10) / 10;
@@ -1851,7 +1828,7 @@ export default {
     deficit(required) {
         if (required === 'N/A') return 'N/A';
         const diff = required - this.totalMoveSpeed;
-        return diff > 0 ? diff : '충족';
+        return diff > 0 ? diff : 'Đã đủ';
     },
     isMet(required) {
         if (required === 'N/A') return false;
@@ -1959,7 +1936,7 @@ td > select, td > input {
   box-sizing: border-box;
 }
 
-/* 공속 계산기: 9열이라 좁은 화면에서만 가로 스크롤 */
+/* Bảng tính tốc đánh có 9 cột; màn hình hẹp cho phép cuộn ngang. */
 .calc-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -2273,7 +2250,7 @@ h3, h4 {
   margin-bottom: 6px;
 }
 
-/* border-collapse 때문에 sticky 셀의 border가 사라져 box-shadow로 대체한다 */
+/* Dùng box-shadow để giữ đường viền cho ô cố định khi border-collapse được bật. */
 .rune-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;

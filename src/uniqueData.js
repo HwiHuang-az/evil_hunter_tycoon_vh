@@ -1,100 +1,101 @@
-// 유니크 장비 정보 (출처: 이블헌터 타이쿤 공식 카페 v1.317 ~ v1.367 업데이트 글)
-// firstMode/firstStage: 처음 드랍되기 시작하는 부스트 모드와 단계 (이후 상위 단계에서도 드랍)
-// option: 고유옵션. '' 은 아직 원문 확보 못한 항목.
-//
-// 드랍 방식: 일반몬스터 < 카오스/어비스 보스 < 필드보스 순으로 드랍률이 올라간다.
-// 드랍된 유니크 오브젝트를 터치하거나, 방치 시 마을창고로 자동 획득된다.
+// Thông tin trang bị Độc nhất, tổng hợp từ ghi chú cập nhật v1.317–v1.367.
+// Trang bị có thể rơi ở bậc đầu tiên được ghi trong bảng và mọi bậc cao hơn.
+// Tỉ lệ rơi tăng theo thứ tự: quái thường < Boss Hỗn Mang/Vực Thẳm < Boss Thế Giới.
 
-export const uniqueModes = ['카오스 부스트', '어비스 부스트'];
+export const uniqueModes = ['Hỗn Mang Boost', 'Vực Thẳm Boost'];
 
-// 각 난이도(부스트 단계)가 추가된 시점. date 는 공식 카페 업데이트 글 기준.
 export const uniqueTimeline = [
-  { stage: '카오스 부스트 1~10단', version: 'v1.317', date: '2024-02-06', note: '유니크 장비 최초 추가' },
-  { stage: '카오스 부스트 11~20단', version: 'v1.322', date: '2024-03-27', note: '' },
-  { stage: '카오스 부스트 21~30단', version: 'v1.331', date: '2024-07-30', note: '' },
-  { stage: '어비스 부스트 1~10단', version: 'v1.352', date: '2025-06-25', note: '어비스 유니크 추가' },
-  { stage: '어비스 부스트 11~20단', version: 'v1.356', date: '2025-09-29', note: '' },
-  { stage: '어비스 부스트 21~30단', version: 'v1.367', date: '2026-02-09', note: '' },
+  {stage: 'Hỗn Mang Boost 1–10', version: 'v1.317', date: '2024-02-06', note: 'Ra mắt trang bị Độc nhất'},
+  {stage: 'Hỗn Mang Boost 11–20', version: 'v1.322', date: '2024-03-27', note: ''},
+  {stage: 'Hỗn Mang Boost 21–30', version: 'v1.331', date: '2024-07-30', note: ''},
+  {stage: 'Vực Thẳm Boost 1–10', version: 'v1.352', date: '2025-06-25', note: 'Bổ sung trang bị Độc nhất Vực Thẳm'},
+  {stage: 'Vực Thẳm Boost 11–20', version: 'v1.356', date: '2025-09-29', note: ''},
+  {stage: 'Vực Thẳm Boost 21–30', version: 'v1.367', date: '2026-02-09', note: ''},
 ];
 
-// 각 유니크의 랜덤옵션 개수는 5 - (고유옵션 개수) 로, 대부분 고유옵션 1개 + 랜덤 4개다.
+// Số tùy chọn ngẫu nhiên = 5 trừ số tùy chọn riêng của trang bị.
 export const uniques = [
-  // 카오스 부스트 1~10단
-  { name: '서리거인의 흉갑', part: '갑옷', mode: '카오스 부스트', stage: '1~10단',
-    option: '피격시 10~25% 확률로 서리파동 시전' },
-  { name: '피학자의 갑옷', part: '갑옷', mode: '카오스 부스트', stage: '1~10단',
-    option: '피격시 기분, 기력, 허기 1~5% 회복' },
-  { name: '블러드피스트', part: '장갑', mode: '카오스 부스트', stage: '1~10단',
-    option: '블러디 버서크 1~3단계 상시 발동' },
-  { name: '헤카테의 장갑', part: '장갑', mode: '카오스 부스트', stage: '1~10단',
-    option: '공격시 10~25% 확률로 커스체인 시전' },
-  { name: '질풍의 경갑', part: '경갑', mode: '카오스 부스트', stage: '1~10단',
-    option: '이동속도 증가량의 3~10%만큼 공격력 증폭(공격력 증폭 30% 제한) / 이동속도가 15~30% 빨라짐 (첫 줄 고정)' },
-  { name: '불굴의 경갑', part: '경갑', mode: '카오스 부스트', stage: '1~10단',
-    option: '행동불가 상태이상 피격시 6초간 받는피해 30~50% 감소' },
-  { name: '호박 마녀 모자', part: '투구', mode: '카오스 부스트', stage: '1~10단',
-    option: '공격시 10~20% 확률로 체인지펌킨 시전' },
-  { name: '저거너트 헬름', part: '투구', mode: '카오스 부스트', stage: '1~10단',
-    option: '막장 성격인 헌터의 이동속도와 전체공격력 30% 증가 / 체력 20~30% 증가 (첫 줄 고정)' },
-  { name: '뇌룡의 허리띠', part: '벨트', mode: '카오스 부스트', stage: '1~10단',
-    option: '뇌룡의 분노 1~3단계 상시 발동' },
-  { name: '연금술사의 벨트', part: '벨트', mode: '카오스 부스트', stage: '1~10단',
-    option: '포션 사용시 25~50% 확률로 개수 미차감' },
-  // 카오스 부스트 11~20단
-  { name: '하데스의 목걸이', part: '목걸이', mode: '카오스 부스트', stage: '11~20단',
-    option: '지하세계의 왕 1~3단계 상시 발동' },
-  { name: '경비대장의 목걸이', part: '목걸이', mode: '카오스 부스트', stage: '11~20단',
-    option: '경비대장의 특권 상시 발동' },
-  { name: '싸이클론 링', part: '반지', mode: '카오스 부스트', stage: '11~20단',
-    option: '싸이클론 스킬 지속시간 2~4초 증가' },
-  { name: '트리니티 링', part: '반지', mode: '카오스 부스트', stage: '11~20단',
-    option: '삼위일체 1~3단계 상시 발동' },
-  // 카오스 부스트 21~30단
-  { name: '통찰의 투구', part: '투구', mode: '카오스 부스트', stage: '21~30단',
-    option: '2,3차 직업 스킬 레벨 1~3 증가' },
-  { name: '실프의 허리띠', part: '벨트', mode: '카오스 부스트', stage: '21~30단',
-    option: '공격시 20% 확률로 실프의 축복 1~3단계 시전' },
-  // 어비스 부스트 1~10단 (진 계열, 카오스보다 한 단계 상승한 능력치)
-  { name: '진 서리거인의 흉갑', part: '갑옷', mode: '어비스 부스트', stage: '1~10단',
-    option: '피격시 10~25% 확률로 강화된 서리파동 시전' },
-  { name: '흡수의 갑옷', part: '갑옷', mode: '어비스 부스트', stage: '1~10단',
-    option: '피해를 흡수하는 보호막 적용시 6초간 받는피해 15~30% 감소' },
-  { name: '진 블러드피스트', part: '장갑', mode: '어비스 부스트', stage: '1~10단',
-    option: '강화된 블러디 버서크 1~3단계 상시 발동' },
-  { name: '마이다스의 손', part: '장갑', mode: '어비스 부스트', stage: '1~10단',
-    option: '헌터가 얻는 골드량 35~50% 증가' },
-  { name: '진 질풍의 경갑', part: '경갑', mode: '어비스 부스트', stage: '1~10단',
-    option: '이동속도 증가량의 3~10%만큼 공격력 증폭(공격력 증폭 40% 제한) / 이동속도가 17~32% 빨라짐 (첫 줄 고정)' },
-  { name: '뱀파이어 부츠', part: '경갑', mode: '어비스 부스트', stage: '1~10단',
-    option: '1~3단계 블러드 익스플로전 시전 가능' },
-  // 어비스 부스트 11~20단 (진 악세서리)
-  { name: '진 하데스의 목걸이', part: '목걸이', mode: '어비스 부스트', stage: '11~20단',
-    option: '강화된 지하세계의 왕 1~3단계 상시 발동' },
-  { name: '용의 가호 목걸이', part: '목걸이', mode: '어비스 부스트', stage: '11~20단',
-    option: '용의 가호 1~3단계 상시 발동' },
-  { name: '진 싸이클론 링', part: '반지', mode: '어비스 부스트', stage: '11~20단',
-    option: '싸이클론 스킬 지속시간 4~6초 증가' },
-  { name: '수호자의 희생 반지', part: '반지', mode: '어비스 부스트', stage: '11~20단',
-    option: '1~3단계 희생의 오라 시전 가능' },
-  // 어비스 부스트 21~30단
-  { name: '진 통찰의 투구', part: '투구', mode: '어비스 부스트', stage: '21~30단',
-    option: '2,3차 직업 스킬 레벨 3~5 증가' },
-  { name: '드래곤 로드 크라운', part: '투구', mode: '어비스 부스트', stage: '21~30단',
-    option: '고대의 숨결 1~3단계 상시 발동' },
-  { name: '진 뇌룡의 허리띠', part: '벨트', mode: '어비스 부스트', stage: '21~30단',
-    option: '강화된 뇌룡의 분노 1~3단계 상시 발동' },
-  { name: '루의 허리띠', part: '벨트', mode: '어비스 부스트', stage: '21~30단',
-    option: '피격시 10~25% 확률로 빛 폭발 시전' },
+  // Hỗn Mang Boost 1–10
+  {name: 'Giáp Ngực Người Khổng Lồ Băng Giá', part: 'Áo giáp', mode: 'Hỗn Mang Boost', stage: '1–10',
+    option: 'Khi bị đánh, có 10–25% tỉ lệ tung Sóng Băng Giá'},
+  {name: 'Áo Giáp Khổ Hạnh', part: 'Áo giáp', mode: 'Hỗn Mang Boost', stage: '1–10',
+    option: 'Khi bị đánh, hồi 1–5% Tâm trạng, Thể lực và Độ đói'},
+  {name: 'Nắm Đấm Máu', part: 'Găng tay', mode: 'Hỗn Mang Boost', stage: '1–10',
+    option: 'Luôn kích hoạt Cuồng Nộ Đẫm Máu cấp 1–3'},
+  {name: 'Găng Tay Hecate', part: 'Găng tay', mode: 'Hỗn Mang Boost', stage: '1–10',
+    option: 'Khi tấn công, có 10–25% tỉ lệ tung Chuỗi Nguyền Rủa'},
+  {name: 'Giáp Nhẹ Cuồng Phong', part: 'Giáp nhẹ', mode: 'Hỗn Mang Boost', stage: '1–10',
+    option: 'Khuếch đại Công bằng 3–10% mức tăng tốc chạy (tối đa 30%); tăng 15–30% tốc chạy. Dòng đầu là chỉ số cố định'},
+  {name: 'Giáp Nhẹ Bất Khuất', part: 'Giáp nhẹ', mode: 'Hỗn Mang Boost', stage: '1–10',
+    option: 'Khi bị hiệu ứng khống chế, giảm 30–50% sát thương nhận vào trong 6 giây'},
+  {name: 'Mũ Phù Thủy Bí Ngô', part: 'Mũ giáp', mode: 'Hỗn Mang Boost', stage: '1–10',
+    option: 'Khi tấn công, có 10–20% tỉ lệ tung Biến Hóa Bí Ngô'},
+  {name: 'Mũ Juggernaut', part: 'Mũ giáp', mode: 'Hỗn Mang Boost', stage: '1–10',
+    option: 'Thợ Săn có tính cách Liều Lĩnh được tăng 30% tốc chạy và tổng Công, đồng thời tăng 20–30% HP. Dòng đầu là chỉ số cố định'},
+  {name: 'Thắt Lưng Lôi Long', part: 'Thắt lưng', mode: 'Hỗn Mang Boost', stage: '1–10',
+    option: 'Luôn kích hoạt Cơn Thịnh Nộ Lôi Long cấp 1–3'},
+  {name: 'Thắt Lưng Nhà Giả Kim', part: 'Thắt lưng', mode: 'Hỗn Mang Boost', stage: '1–10',
+    option: 'Khi dùng thuốc, có 25–50% tỉ lệ không tiêu hao vật phẩm'},
+
+  // Hỗn Mang Boost 11–20
+  {name: 'Dây Chuyền Hades', part: 'Dây chuyền', mode: 'Hỗn Mang Boost', stage: '11–20',
+    option: 'Luôn kích hoạt Vua Địa Ngục cấp 1–3'},
+  {name: 'Dây Chuyền Đội Trưởng Cận Vệ', part: 'Dây chuyền', mode: 'Hỗn Mang Boost', stage: '11–20',
+    option: 'Luôn kích hoạt Đặc Quyền Đội Trưởng Cận Vệ'},
+  {name: 'Nhẫn Lốc Xoáy', part: 'Nhẫn', mode: 'Hỗn Mang Boost', stage: '11–20',
+    option: 'Tăng 2–4 giây thời gian duy trì kỹ năng Lốc Xoáy'},
+  {name: 'Nhẫn Trinity', part: 'Nhẫn', mode: 'Hỗn Mang Boost', stage: '11–20',
+    option: 'Luôn kích hoạt Tam Vị Nhất Thể cấp 1–3'},
+
+  // Hỗn Mang Boost 21–30
+  {name: 'Mũ Minh Triết', part: 'Mũ giáp', mode: 'Hỗn Mang Boost', stage: '21–30',
+    option: 'Tăng 1–3 cấp kỹ năng nghề bậc 2 và bậc 3'},
+  {name: 'Thắt Lưng Sylph', part: 'Thắt lưng', mode: 'Hỗn Mang Boost', stage: '21–30',
+    option: 'Khi tấn công, có 20% tỉ lệ tung Phước Lành Sylph cấp 1–3'},
+
+  // Vực Thẳm Boost 1–10
+  {name: 'Giáp Ngực Người Khổng Lồ Băng Giá Chân', part: 'Áo giáp', mode: 'Vực Thẳm Boost', stage: '1–10',
+    option: 'Khi bị đánh, có 10–25% tỉ lệ tung Sóng Băng Giá Cường Hóa'},
+  {name: 'Áo Giáp Hấp Thụ', part: 'Áo giáp', mode: 'Vực Thẳm Boost', stage: '1–10',
+    option: 'Khi nhận lá chắn hấp thụ sát thương, giảm 15–30% sát thương nhận vào trong 6 giây'},
+  {name: 'Nắm Đấm Máu Chân', part: 'Găng tay', mode: 'Vực Thẳm Boost', stage: '1–10',
+    option: 'Luôn kích hoạt Cuồng Nộ Đẫm Máu Cường Hóa cấp 1–3'},
+  {name: 'Bàn Tay Midas', part: 'Găng tay', mode: 'Vực Thẳm Boost', stage: '1–10',
+    option: 'Tăng 35–50% lượng Vàng Thợ Săn nhận được'},
+  {name: 'Giáp Nhẹ Cuồng Phong Chân', part: 'Giáp nhẹ', mode: 'Vực Thẳm Boost', stage: '1–10',
+    option: 'Khuếch đại Công bằng 3–10% mức tăng tốc chạy (tối đa 40%); tăng 17–32% tốc chạy. Dòng đầu là chỉ số cố định'},
+  {name: 'Ủng Ma Cà Rồng', part: 'Giáp nhẹ', mode: 'Vực Thẳm Boost', stage: '1–10',
+    option: 'Cho phép tung Bùng Nổ Máu cấp 1–3'},
+
+  // Vực Thẳm Boost 11–20
+  {name: 'Dây Chuyền Hades Chân', part: 'Dây chuyền', mode: 'Vực Thẳm Boost', stage: '11–20',
+    option: 'Luôn kích hoạt Vua Địa Ngục Cường Hóa cấp 1–3'},
+  {name: 'Dây Chuyền Long Hộ', part: 'Dây chuyền', mode: 'Vực Thẳm Boost', stage: '11–20',
+    option: 'Luôn kích hoạt Long Hộ cấp 1–3'},
+  {name: 'Nhẫn Lốc Xoáy Chân', part: 'Nhẫn', mode: 'Vực Thẳm Boost', stage: '11–20',
+    option: 'Tăng 4–6 giây thời gian duy trì kỹ năng Lốc Xoáy'},
+  {name: 'Nhẫn Hy Sinh Hộ Vệ', part: 'Nhẫn', mode: 'Vực Thẳm Boost', stage: '11–20',
+    option: 'Cho phép tung Hào Quang Hy Sinh cấp 1–3'},
+
+  // Vực Thẳm Boost 21–30
+  {name: 'Mũ Minh Triết Chân', part: 'Mũ giáp', mode: 'Vực Thẳm Boost', stage: '21–30',
+    option: 'Tăng 3–5 cấp kỹ năng nghề bậc 2 và bậc 3'},
+  {name: 'Vương Miện Chúa Tể Rồng', part: 'Mũ giáp', mode: 'Vực Thẳm Boost', stage: '21–30',
+    option: 'Luôn kích hoạt Hơi Thở Cổ Đại cấp 1–3'},
+  {name: 'Thắt Lưng Lôi Long Chân', part: 'Thắt lưng', mode: 'Vực Thẳm Boost', stage: '21–30',
+    option: 'Luôn kích hoạt Cơn Thịnh Nộ Lôi Long Cường Hóa cấp 1–3'},
+  {name: 'Thắt Lưng Lu', part: 'Thắt lưng', mode: 'Vực Thẳm Boost', stage: '21–30',
+    option: 'Khi bị đánh, có 10–25% tỉ lệ gây Bùng Nổ Ánh Sáng'},
 ];
 
-// 유니크 장비에 붙는 랜덤옵션 목록 (고유옵션 외 나머지 슬롯)
 export const uniqueRandomOptions = [
-  '기분 소모량 9~19% 감소', '기력 소모량 9~19% 감소', '허기 소모량 9~19% 감소',
-  '전체 공격력 14~26% 증가', '전체 방어력 14~26% 증가', '체력 14~26% 증가',
-  '회피력 7~14% 증가', '공격속도 7~14% 상승', '치명타 확률 7~14% 증가',
-  '이동속도가 9~19% 빨라짐', '획득 경험치 7~14% 증가',
-  '데미지의 9~19%를 흡혈', '9~19% 확률로 받는 데미지 25% 감소',
-  '적 처치시 9~19% 확률로 2배의 골드 획득', '9~19% 확률로 재료 추가 획득',
-  '보스류 25~40% 데미지 증가', '영장류 25~40% 데미지 증가', '악마류 25~40% 데미지 증가',
-  '언데드류 25~40% 데미지 증가', '동물류 25~40% 데미지 증가', '치명타 피해량 25~40% 증가',
+  'Giảm 9–19% tiêu hao Tâm trạng', 'Giảm 9–19% tiêu hao Thể lực', 'Giảm 9–19% tiêu hao Độ đói',
+  'Tăng 14–26% tổng Công', 'Tăng 14–26% tổng Thủ', 'Tăng 14–26% HP',
+  'Tăng 7–14% Sức mạnh', 'Tăng 7–14% tốc đánh', 'Tăng 7–14% tỉ lệ chí mạng',
+  'Tăng 9–19% tốc chạy', 'Tăng 7–14% kinh nghiệm nhận được',
+  'Hút máu bằng 9–19% sát thương gây ra', 'Có 9–19% tỉ lệ giảm 25% sát thương nhận vào',
+  'Khi hạ kẻ địch, có 9–19% tỉ lệ nhận gấp đôi Vàng', 'Có 9–19% tỉ lệ nhận thêm nguyên liệu',
+  'Tăng 25–40% sát thương lên Boss', 'Tăng 25–40% sát thương lên Quái nhân',
+  'Tăng 25–40% sát thương lên Quỷ', 'Tăng 25–40% sát thương lên Xác sống',
+  'Tăng 25–40% sát thương lên Thú', 'Tăng 25–40% sát thương chí mạng',
 ];

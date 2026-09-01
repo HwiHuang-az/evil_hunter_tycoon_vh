@@ -1,6 +1,6 @@
 const {defineConfig} = require('@vue/cli-service')
 module.exports = defineConfig({
     transpileDependencies: true,
-    publicPath: '/evil_hunter_tycoon',
+    publicPath: '/evil_hunter_tycoon_vh/',
     outputDir: 'docs'
 });
