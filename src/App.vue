@@ -979,7 +979,7 @@
   </div>
 
   <div class="maker">
-    <div v-for="(credit, i) in currentCredits" :key="i">{{ credit.role }}) {{ credit.name }}</div>
+    <div v-for="(credit, i) in currentCredits" :key="i">{{ credit.role }} bởi {{ credit.name }}</div>
   </div>
 </template>
 
@@ -1013,12 +1013,9 @@ export default {
               activeTab: 'attack', // Set 'attack' as the default active tab
               isOpened: false,
               tabCredits: {
-                attack: [
-                  { role: 'Phát triển', name: 'HwiHuang' },
-                  { role: 'Phát triển', name: 'HwiHuang' },
-                ],
-                move: [{ role: 'Phát triển', name: 'HwiHuang' }],
-                kills: [{ role: 'Phát triển', name: 'HwiHuang' }],
+                attack: [{ role: 'Việt hóa', name: 'HwiHuang' }],
+                move: [{ role: 'Việt hóa', name: 'HwiHuang' }],
+                kills: [{ role: 'Việt hóa', name: 'HwiHuang' }],
                 rune: [{ role: 'Việt hóa', name: 'HwiHuang' }],
                 dogam: [{ role: 'Việt hóa', name: 'HwiHuang' }],
                 pet: [{ role: 'Việt hóa', name: 'HwiHuang' }],
